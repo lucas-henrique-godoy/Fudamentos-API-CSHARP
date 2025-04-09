@@ -1,6 +1,7 @@
 				*CURSO DE WEB API C# | ASP.NET CORE 7.0 
 
-- Uma API (Interface de Programação de Aplicações, em português) é um conjunto de regras e definições que permite que diferentes softwares se comuniquem entre si. Em outras palavras, é um intermediário que possibilita que um sistema acesse funcionalidades ou dados de outro sistema de forma padronizada e segura.
+- DEFINIÇÃO: 
+Uma API (Interface de Programação de Aplicações, em português) é um conjunto de regras e definições que permite que diferentes softwares se comuniquem entre si. Em outras palavras, é um intermediário que possibilita que um sistema acesse funcionalidades ou dados de outro sistema de forma padronizada e segura.
 
 Imagine uma API como um garçom em um restaurante. O garçom (a API) leva o pedido do cliente (um sistema) para a cozinha (outro sistema) e, em seguida, traz a comida de volta para o cliente. O cliente não precisa saber como a comida é preparada ou o que acontece nos bastidores, ele só faz o pedido e recebe o que foi solicitado.
 
