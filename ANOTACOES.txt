@@ -35,9 +35,35 @@ CLIENTE ---> POST api/usuários ---> SERVIDOR  //Se a requisição for concluida
 }
 
 
+*Método POST: Serve para adicionar dados --> api/usuários      {
+								  "nome":"Felipe Brito",      SERVIDOR
+							       }
 
-*Método GET: Serve para obter dados de um servidor
 
+
+*Método PUT: Seve para atualizar dados--> api/usuários/7   {
+							      "nome":"Felipe Brito Dev",     SERVIDOR
+							   }
+
+
+
+
+*Método GET: Serve para obter dados de um servidor -->   api/usuários/7 retorna apenas 1 usuário que tem id 7	{        JSON
+							      			         		          "nome":"Felipe Brito Dev",   <---  SERVIDOR
+							   							}
+	
+
+*Método DELETE: Serve para deletar dados.--> api/usuários/7
+
+
+
+--SOLICITAÇÕES: Solicitações HTTP. É quando um dispositivo ou um navegador de internet, solicita ao servidor as informações.
+PRINCIPAIS VERBOS:
+GET:
+POST:
+PUT:
+DELETE:
+PATCH:
 
 
 
