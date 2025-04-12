@@ -5,4 +5,21 @@ A API serve para abstrair todo o código de sistemas complexos e legados, facili
 
 - COMO FUNCIONA UMA WEB API?: Dispositivos como celulares, notebooks, acessam a API por meio do protocolo HTTP, que é utilizado para comunicação com a mesma. A API por sua vez, vai até o banco de dados e faz a coleta das informações, e retorna em um formato que meu celular ou notebook compreendem, que é o formato JSON.
 
-- COMO FUNCIONA O HTTP?: O HTTP é o protocolo que os navegadores utilizam para se comunicar com os servidores. Exemplo: quando acessamos um site, você já esta utilizando o protocolo HTTP em um servidor, e retorna uma página HTML.  	
+- COMO FUNCIONA O HTTP?: O HTTP é o protocolo que os navegadores utilizam para se comunicar com os servidores. Exemplo: quando acessamos um site, você já esta utilizando o protocolo HTTP em um servidor, e retorna uma página HTML. 
+
+-- EXEMPLO WEB API - GET: Um  navegador web,  e essa tela precisa carregador dados dos usuário, ou seja precisa listar os dados do usuário. Então a minha tela/front-end, vai no servidor e faz uma requisição: 
+
+GET /api/usuarios
+Descrição: Retorna a lista de usuários cadastrados.
+
+		📌 Tabela de resumo:
++--------+---------------------+----------------------------------------+
+| Método | Endpoint            | Descrição                              |
++--------+---------------------+----------------------------------------+
+| GET    | /api/usuarios       | Lista todos os usuários                |
+| POST   | /api/usuarios       | Cria um novo usuário                   |
+| GET    | /api/usuarios/1     | Retorna usuário com ID = 1             |
+| PUT    | /api/usuarios/1     | Atualiza usuário com ID = 1            |
+| DELETE | /api/usuarios/1     | Remove usuário com ID = 1              |
++--------+---------------------+----------------------------------------+
+	
