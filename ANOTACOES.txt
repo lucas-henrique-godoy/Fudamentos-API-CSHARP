@@ -9,8 +9,16 @@ A API serve para abstrair todo o código de sistemas complexos e legados, facili
 
 -- EXEMPLO WEB API - GET: Um  navegador web,  e essa tela precisa carregador dados dos usuário, ou seja precisa listar os dados do usuário. Então a minha tela/front-end, vai no servidor e faz uma requisição: 
 
-GET /api/usuarios
-Descrição: Retorna a lista de usuários cadastrados.
+
+CLIENTE --->   GET /api/usuários ---> SERVIDOR   //Descrição: Retorna a lista de usuários cadastrados.
+
+
+
+
+*Método GET: Serve para obter dados de um servidor
+
+
+
 
 		📌 Tabela de resumo:
 +--------+---------------------+----------------------------------------+
@@ -22,4 +30,6 @@ Descrição: Retorna a lista de usuários cadastrados.
 | PUT    | /api/usuarios/1     | Atualiza usuário com ID = 1            |
 | DELETE | /api/usuarios/1     | Remove usuário com ID = 1              |
 +--------+---------------------+----------------------------------------+
+
+
 	
