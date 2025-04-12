@@ -1,3 +1,4 @@
 				*CURSO DE WEB API C# | ASP.NET CORE 7.0 
 
-- DEFINIÇÃO: Uma interface que possui um conjunto de métodos que facilitam a vida do programador, podendo acessar esses métodos de uma forma simplificada 
+- DEFINIÇÃO: Uma interface que possui um conjunto de métodos que facilitam a vida do programador, podendo acessar esses métodos de uma forma simplificada. 
+A API serve para abstrair todo o código de sistemas complexos e legados, facilitando a vida do programador.
