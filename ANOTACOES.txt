@@ -7,10 +7,16 @@ A API serve para abstrair todo o código de sistemas complexos e legados, facili
 
 - COMO FUNCIONA O HTTP?: O HTTP é o protocolo que os navegadores utilizam para se comunicar com os servidores. Exemplo: quando acessamos um site, você já esta utilizando o protocolo HTTP em um servidor, e retorna uma página HTML. 
 
--- EXEMPLO WEB API - GET: Um  navegador web,  e essa tela precisa carregador dados dos usuário, ou seja precisa listar os dados do usuário. Então a minha tela/front-end, vai no servidor e faz uma requisição: 
+--EXEMPLO WEB API - GET:
+ Um  navegador web,  e essa tela precisa carregador dados dos usuário, ou seja precisa listar os dados do usuário. Então a minha tela/front-end, vai no servidor e faz uma requisição: 
 
+- CLIENTE --->   GET /api/usuários ---> SERVIDOR   //Descrição: Retorna a lista de usuários cadastrados. EX: Endpoint ou URL- youtube/api/usuários - Retorna todos os usuários que tem no banco. O servidor por sua vez vai no banco de dados, coleta as informações e retorna em um formato  que ele entende(JSON),  e um código de 200 OK (requisição ocorreu com sucesso).
 
-CLIENTE --->   GET /api/usuários ---> SERVIDOR   //Descrição: Retorna a lista de usuários cadastrados. EX: Endpoint ou URL- youtube/api/usuários - Retorna todos os usuários que tem no banco. O servidor por sua vez vai no banco de dados, coleta as informações e retorna em um formato  que ele entende(JSON),  e um código de 200 OK (requisição ocorreu com sucesso).
+--EXEMPLO WEB API - POST:
+CLIENTE ---> POST api/usuários ---> SERVIDOR
+             {
+	 	"nome":"Felipe Brito",
+	     } 
 
 
 - FORMATO JSON: É formato composto por chave e valor, onde o front-end consegue ler muito rápido.EXEMPLO:
