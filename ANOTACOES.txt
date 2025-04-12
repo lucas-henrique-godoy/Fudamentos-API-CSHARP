@@ -1,82 +1,101 @@
-				*CURSO DE WEB API C# | ASP.NET CORE 7.0 
+CURSO DE WEB API C# | ASP.NET CORE 7.0
+============================================================
 
-- DEFINIÇÃO: Uma interface que possui um conjunto de métodos que facilitam a vida do programador, podendo acessar esses métodos de uma forma simplificada. 
-A API serve para abstrair todo o código de sistemas complexos e legados, facilitando a vida do programador.
+1. O QUE É UMA API?
+------------------------------------------------------------
+API (Interface de Programação de Aplicações) é um conjunto de métodos 
+e padrões que permite a comunicação entre sistemas. 
+Serve para simplificar o acesso a sistemas complexos ou legados, 
+abstraindo detalhes técnicos.
 
-- COMO FUNCIONA UMA WEB API?: Dispositivos como celulares, notebooks, acessam a API por meio do protocolo HTTP, que é utilizado para comunicação com a mesma. A API por sua vez, vai até o banco de dados e faz a coleta das informações, e retorna em um formato que meu celular ou notebook compreendem, que é o formato JSON.
+2. COMO FUNCIONA UMA WEB API?
+------------------------------------------------------------
+- Dispositivos (celulares, navegadores, etc.) acessam a API via HTTP.
+- A API consulta o banco de dados e devolve os dados em JSON.
+- O JSON é facilmente interpretado pelo front-end.
 
-- COMO FUNCIONA O HTTP?: O HTTP é o protocolo que os navegadores utilizam para se comunicar com os servidores. Exemplo: quando acessamos um site, você já esta utilizando o protocolo HTTP em um servidor, e retorna uma página HTML. 
+3. O QUE É HTTP?
+------------------------------------------------------------
+HTTP (HyperText Transfer Protocol) é o protocolo de comunicação entre 
+cliente e servidor. Ex: quando acessamos um site, o navegador faz uma 
+requisição HTTP e o servidor retorna uma página HTML.
 
---EXEMPLO WEB API - GET:
- Um  navegador web,  e essa tela precisa carregador dados dos usuário, ou seja precisa listar os dados do usuário. Então a minha tela/front-end, vai no servidor e faz uma requisição: 
+4. O QUE É JSON?
+------------------------------------------------------------
+JSON (JavaScript Object Notation) é um formato de dados baseado em 
+chave/valor, leve e fácil de ler.
 
-- CLIENTE --->   GET /api/usuários ---> SERVIDOR   //Descrição: Retorna a lista de usuários cadastrados. EX: Endpoint ou URL- youtube/api/usuários - Retorna todos os usuários que tem no banco. O servidor por sua vez vai no banco de dados, coleta as informações e retorna em um formato  que ele entende(JSON),  e um código de 200 OK (requisição ocorreu com sucesso).
-
---EXEMPLO WEB API - POST:
-CLIENTE ---> POST api/usuários ---> SERVIDOR  //Se a requisição for concluida com êxito, o servidor retorna o código 200.
-             {
-	 	"nome":"Felipe Brito",
-	     } 
-
-
-- FORMATO JSON: É formato composto por chave e valor, onde o front-end consegue ler muito rápido.EXEMPLO:
+Exemplo:
 {
-    "id":1,
-    "nome:"Galdino",
-    "empresas": [
-  {
-
-    "nome_fantasia":"Youtube"
-  },
-  {
-    "nome_fantasia":"AWS"
-  },
- ]	
+  "id": 1,
+  "nome": "Galdino",
+  "empresas": [
+    { "nome_fantasia": "Youtube" },
+    { "nome_fantasia": "AWS" }
+  ]
 }
 
+5. VERBOS HTTP (MÉTODOS)
+------------------------------------------------------------
+GET     - Obter dados
+POST    - Criar dados
+PUT     - Atualizar dados
+DELETE  - Remover dados
+PATCH   - Atualizar parcialmente dados
 
-*Método POST: Serve para adicionar dados --> api/usuários      {
-								  "nome":"Felipe Brito",      SERVIDOR
-							       }
+6. EXEMPLOS DE USO
+------------------------------------------------------------
 
+GET - Lista todos os usuários
+CLIENTE --> GET /api/usuarios --> SERVIDOR
+Resposta: Lista de usuários + código 200 OK
 
+POST - Cria um novo usuário
+CLIENTE --> POST /api/usuarios --> SERVIDOR
+Corpo da requisição:
+{
+  "nome": "Felipe Brito"
+}
+Resposta: Código 200 ou 201
 
-*Método PUT: Seve para atualizar dados--> api/usuários/7   {
-							      "nome":"Felipe Brito Dev",     SERVIDOR
-							   }
+PUT - Atualiza um usuário existente
+CLIENTE --> PUT /api/usuarios/7 --> SERVIDOR
+Corpo:
+{
+  "nome": "Felipe Brito Dev"
+}
 
+GET (ID) - Retorna um usuário específico
+GET /api/usuarios/7
+Resposta:
+{
+  "id": 7,
+  "nome": "Felipe Brito Dev"
+}
 
+DELETE - Remove um usuário
+DELETE /api/usuarios/7
 
+7. CÓDIGOS DE STATUS HTTP MAIS COMUNS
+------------------------------------------------------------
+200 OK           - Sucesso na requisição
+201 Created      - Recurso criado com sucesso
+204 No Content   - Requisição sem conteúdo de retorno
+400 Bad Request  - Requisição malformada
+404 Not Found    - Recurso não encontrado
+500 Internal Error - Erro interno do servidor
 
-*Método GET: Serve para obter dados de um servidor -->   api/usuários/7 retorna apenas 1 usuário que tem id 7	{        JSON
-							      			         		          "nome":"Felipe Brito Dev",   <---  SERVIDOR
-							   							}
-	
+8. TABELA DE RESUMO DOS ENDPOINTS
+------------------------------------------------------------
 
-*Método DELETE: Serve para deletar dados.--> api/usuários/7
++--------+---------------------+--------------------------------------+
+| Método | Endpoint            | Descrição                            |
++--------+---------------------+--------------------------------------+
+| GET    | /api/usuarios       | Lista todos os usuários              |
+| POST   | /api/usuarios       | Cria um novo usuário                 |
+| GET    | /api/usuarios/1     | Retorna usuário com ID = 1           |
+| PUT    | /api/usuarios/1     | Atualiza usuário com ID = 1          |
+| DELETE | /api/usuarios/1     | Remove usuário com ID = 1            |
++--------+---------------------+--------------------------------------+
 
-
-
---SOLICITAÇÕES: Solicitações HTTP. É quando um dispositivo ou um navegador de internet, solicita ao servidor as informações.
-PRINCIPAIS VERBOS:
-GET: Obter dados
-POST: Enviar dados
-PUT: Atualizar dados
-DELETE: Remover dados
-PATCH: Usado para atualizar apenas alguns resgistros
-
-
-
-		📌 Tabela de resumo:
-+--------+---------------------+----------------------------------------+
-| Método | Endpoint            | Descrição                              |
-+--------+---------------------+----------------------------------------+
-| GET    | /api/usuarios       | Lista todos os usuários                |
-| POST   | /api/usuarios       | Cria um novo usuário                   |
-| GET    | /api/usuarios/1     | Retorna usuário com ID = 1             |
-| PUT    | /api/usuarios/1     | Atualiza usuário com ID = 1            |
-| DELETE | /api/usuarios/1     | Remove usuário com ID = 1              |
-+--------+---------------------+----------------------------------------+
-
-
-	
+============================================================
