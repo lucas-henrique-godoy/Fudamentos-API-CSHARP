@@ -59,11 +59,11 @@ CLIENTE ---> POST api/usuários ---> SERVIDOR  //Se a requisição for concluida
 
 --SOLICITAÇÕES: Solicitações HTTP. É quando um dispositivo ou um navegador de internet, solicita ao servidor as informações.
 PRINCIPAIS VERBOS:
-GET:
-POST:
-PUT:
-DELETE:
-PATCH:
+GET: Obter dados
+POST: Enviar dados
+PUT: Atualizar dados
+DELETE: Remover dados
+PATCH: Usado para atualizar apenas alguns resgistros
 
 
 
