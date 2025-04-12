@@ -3,6 +3,6 @@
 - DEFINIÇÃO: Uma interface que possui um conjunto de métodos que facilitam a vida do programador, podendo acessar esses métodos de uma forma simplificada. 
 A API serve para abstrair todo o código de sistemas complexos e legados, facilitando a vida do programador.
 
-- COMO FUNCIONA UMA WEB API?:
+- COMO FUNCIONA UMA WEB API?: Dispositivos como celulares, notebooks, acessam a API por meio do protocolo HTTP, que é utilizado para comunicação com a mesma. A API por sua vez, vai até o banco de dados e faz a coleta das informações, e retorna em um formato que meu celular ou notebook compreendem, que é o formato JSON.
 
-Dispositivos como celulares, notebooks, acessam a API por meio do protocolo HTTP, que é utilizado para comunicação com a mesma. A API por sua vez, vai até o banco de dados e faz a coleta das informações, e retorna em um formato que meu celular ou notebook compreendem, que é o formato JSON.
+- COMO FUNCIONA O HTTP?: O HTTP é o protocolo que os navegadores utilizam para se comunicar com os servidores. Exemplo: quando acessamos um site, você já esta utilizando o protocolo HTTP em um servidor, e retorna uma página HTML.  	
