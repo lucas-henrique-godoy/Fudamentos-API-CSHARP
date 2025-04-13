@@ -39,9 +39,9 @@ Exemplo:
 ------------------------------------------------------------
 GET     - Obter dados
 POST    - Criar dados
-PUT     - Atualizar dados
-DELETE  - Remover dados
+PUT     - Atualizar dados (completo)
 PATCH   - Atualizar parcialmente dados
+DELETE  - Remover dados
 
 6. EXEMPLOS DE USO
 ------------------------------------------------------------
@@ -58,11 +58,18 @@ Corpo da requisição:
 }
 Resposta: Código 200 ou 201
 ------------------------------------------------------------
-PUT - Atualiza um usuário existente
+PUT - Atualiza um usuário existente (substitui todos os dados)
 CLIENTE --> PUT /api/usuarios/7 --> SERVIDOR
 Corpo:
 {
   "nome": "Felipe Brito Dev"
+}
+------------------------------------------------------------
+PATCH - Atualiza parcialmente um usuário (apenas campos específicos)
+CLIENTE --> PATCH /api/usuarios/7 --> SERVIDOR
+Corpo:
+{
+  "nome": "Felipe Atualizado"
 }
 ------------------------------------------------------------
 GET (ID) - Retorna um usuário específico
@@ -79,11 +86,11 @@ DELETE /api/usuarios/7
 
 7. CÓDIGOS DE STATUS HTTP MAIS COMUNS
 ------------------------------------------------------------
-200 OK           - Sucesso na requisição
-201 Created      - Recurso criado com sucesso
-204 No Content   - Requisição sem conteúdo de retorno
-400 Bad Request  - Requisição malformada
-404 Not Found    - Recurso não encontrado
+200 OK             - Sucesso na requisição
+201 Created        - Recurso criado com sucesso
+204 No Content     - Requisição sem conteúdo de retorno
+400 Bad Request    - Requisição malformada
+404 Not Found      - Recurso não encontrado
 500 Internal Error - Erro interno do servidor
 
 8. TABELA DE RESUMO DOS ENDPOINTS
@@ -96,7 +103,8 @@ DELETE /api/usuarios/7
 | POST   | /api/usuarios       | Cria um novo usuário                 |
 | GET    | /api/usuarios/1     | Retorna usuário com ID = 1           |
 | PUT    | /api/usuarios/1     | Atualiza usuário com ID = 1          |
+| PATCH  | /api/usuarios/1     | Atualiza parcialmente o usuário      |
 | DELETE | /api/usuarios/1     | Remove usuário com ID = 1            |
 +--------+---------------------+--------------------------------------+
 
-============================================================
+======================================================================
