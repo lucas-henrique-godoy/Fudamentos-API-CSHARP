@@ -90,7 +90,7 @@ DELETE /api/usuarios/7
 - Redirecionamentos (300-399)
 - Erros do cliente (400-499)
 - Erros do servidor (500-599)
-------------------------------------------------------------
+------------------------------------------------------------------------
 EXEMPLOS:
 200 OK             - Sucesso na requisição
 201 Created        - Recurso criado com sucesso
@@ -100,7 +100,7 @@ EXEMPLOS:
 500 Internal Error - Erro interno do servidor
 
 8. TABELA DE RESUMO DOS ENDPOINTS
-------------------------------------------------------------
+-----------------------------------------------------------------------
 
 +--------+---------------------+--------------------------------------+
 | Método | Endpoint            | Descrição                            |
