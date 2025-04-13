@@ -84,8 +84,14 @@ DELETE - Remove um usuário
 DELETE /api/usuarios/7
 ------------------------------------------------------------
 
-7. CÓDIGOS DE STATUS HTTP MAIS COMUNS: O servidores emitem códigos de resposta, indicando que a solicitação está  sendo processada, houve um erro na solicitação ou ocorreu com sucesso.
+7. CÓDIGOS DE STATUS HTTP MAIS COMUNS: O servidores emitem códigos de resposta, indicando que a solicitação está  sendo processada, houve um erro na solicitação ou ocorreu com sucesso. Códigos de respostas:
+- Respostas de informação (100-199)
+- Respostas de sucesso (200-299)
+- Redirecionamentos (300-399)
+- Erros do cliente (400-499)
+- Erros do servidor (500-599)
 ------------------------------------------------------------
+EXEMPLOS:
 200 OK             - Sucesso na requisição
 201 Created        - Recurso criado com sucesso
 204 No Content     - Requisição sem conteúdo de retorno
