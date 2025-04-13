@@ -114,3 +114,12 @@ EXEMPLOS:
 +--------+---------------------+--------------------------------------+
 
 ======================================================================
+
+CRIAÇÃO DA API: 
+1- Escolheu a versão 7.0 do .NET.
+2- Já havia criado  uma tabela e um banco de dados.
+3- Instalou o package Npgsql Entity Framework Core provider for PostgreSQL para conectar com o banco PostgreSQL.
+4- Instalou o package Microsoft.EntityFrameworkCore para mapear o banco de dados.
+5- Criou uma pasta chamada Model.
+6- Dentro da pasta model criou uma classe(model) chamada Employee com as propriedades com nomes idênticos aos campos da tabela do banco de dados.
+7- Criou uma interface usando o padrão repository chamado IEmployee
