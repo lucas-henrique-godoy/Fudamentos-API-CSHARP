@@ -49,7 +49,7 @@ PATCH   - Atualizar parcialmente dados
 GET - Lista todos os usuários
 CLIENTE --> GET /api/usuarios --> SERVIDOR
 Resposta: Lista de usuários + código 200 OK
-
+------------------------------------------------------------
 POST - Cria um novo usuário
 CLIENTE --> POST /api/usuarios --> SERVIDOR
 Corpo da requisição:
@@ -57,14 +57,14 @@ Corpo da requisição:
   "nome": "Felipe Brito"
 }
 Resposta: Código 200 ou 201
-
+------------------------------------------------------------
 PUT - Atualiza um usuário existente
 CLIENTE --> PUT /api/usuarios/7 --> SERVIDOR
 Corpo:
 {
   "nome": "Felipe Brito Dev"
 }
-
+------------------------------------------------------------
 GET (ID) - Retorna um usuário específico
 GET /api/usuarios/7
 Resposta:
@@ -72,9 +72,10 @@ Resposta:
   "id": 7,
   "nome": "Felipe Brito Dev"
 }
-
+------------------------------------------------------------
 DELETE - Remove um usuário
 DELETE /api/usuarios/7
+------------------------------------------------------------
 
 7. CÓDIGOS DE STATUS HTTP MAIS COMUNS
 ------------------------------------------------------------
