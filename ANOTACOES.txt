@@ -84,7 +84,7 @@ DELETE - Remove um usuário
 DELETE /api/usuarios/7
 ------------------------------------------------------------
 
-7. CÓDIGOS DE STATUS HTTP MAIS COMUNS
+7. CÓDIGOS DE STATUS HTTP MAIS COMUNS: O servidores emitem códigos de resposta, indicando que a solicitação está  sendo processada, houve um erro na solicitação ou ocorreu com sucesso.
 ------------------------------------------------------------
 200 OK             - Sucesso na requisição
 201 Created        - Recurso criado com sucesso
