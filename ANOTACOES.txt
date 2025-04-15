@@ -122,4 +122,4 @@ CRIAÇÃO DA API:
 4- Instalou o package Microsoft.EntityFrameworkCore para mapear o banco de dados.
 5- Criou uma pasta chamada Model.
 6- Dentro da pasta model criou uma classe(model) chamada Employee com as propriedades com nomes idênticos aos campos da tabela do banco de dados.
-7- Criou uma interface usando o padrão repository chamado IEmployee
+7- Criou uma interface usando o padrão repository chamado IEmployee.
