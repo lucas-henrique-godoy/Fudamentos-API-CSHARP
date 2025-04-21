@@ -37,11 +37,12 @@ Exemplo:
 
 5. VERBOS HTTP (MÉTODOS)
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-GET     - Obter dados
-POST    - Enviar dados(novo cadastro)
-PUT     - Atualizar dados (substituir objeto completo)
-PATCH   - Atualizar dados (substituir objeto parcial)
-DELETE  - Excluir um registro no servidor
+GET     - Obter dados.
+POST    - Enviar dados(novo cadastro).
+PUT     - Atualizar dados (substituir objeto completo).
+PATCH   - Atualizar dados (substituir objeto parcial).
+DELETE  - Excluir um registro no servidor.
+OPTIONS - Permitir acesso de domínios diferentes.
 
 6. EXEMPLOS DE USO
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
