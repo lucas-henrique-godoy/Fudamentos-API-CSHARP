@@ -94,8 +94,8 @@ DELETE /api/usuarios/7
 
 EXEMPLOS:
 200 OK             - Sucesso na requisição
-201 Created        - Recurso criado com sucesso
-204 No Content     - Requisição sem conteúdo de retorno
+201 Created        - Cadastro feito com sucesso
+204 No Content     - Sucesso mas sem conteúdo de retorno
 400 Bad Request    - Requisição malformada
 404 Not Found      - Recurso não encontrado
 500 Internal Error - Erro interno do servidor
