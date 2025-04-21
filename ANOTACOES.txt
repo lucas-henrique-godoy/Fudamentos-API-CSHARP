@@ -166,8 +166,6 @@ Stubs de servidor, para facilitar o início do desenvolvimento da API.
 Exemplo simples de uso:
 Um endpoint descrito no Swagger (em YAML) pode parecer com isso:
 
-yaml
-Copiar
 Editar
 paths:
   /usuarios:
