@@ -130,4 +130,4 @@ CRIAÇÃO DA API:
 
 ROTAS: São simplesmente URLS. Endereços para alcançar um recurso único
 EX:  https://serfrontend.com/cursos/javascript-completo/index.html
-     domínio			    localização do recurso: rotas, endpoints
+     domínio	            localização do recurso: rotas, endpoints
