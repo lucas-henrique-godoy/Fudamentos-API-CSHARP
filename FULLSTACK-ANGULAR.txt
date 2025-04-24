@@ -114,3 +114,5 @@ A ordem IDENTITY → depois PRIMARY KEY é só questão de estilo. O SQL aceita 
 
 VARCHAR(100) → você pode usar outro número, mas evite deixar muito grande ou muito pequeno.
 Por exemplo, VARCHAR(10) para nome talvez corte nomes como Fernanda ou Alessandro.
+_______________________________________________________________________________________________________________________________________________________________________
+
