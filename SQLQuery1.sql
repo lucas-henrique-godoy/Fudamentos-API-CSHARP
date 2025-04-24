@@ -26,3 +26,9 @@ VALUES('Lucas',
 	'lucas@email.com'
 );
 
+--Mostrando todas as informações da tabela:
+SELECT * FROM Pessoas;
+
+--Exemplo de como filtrar informações com o WHERE
+SELECT * FROM Pessoas
+WHERE PES_CPF = '44003132053';
