@@ -12,7 +12,7 @@ ________________________________________________________________________________
  4- Criar Frontend Angular simples com formulários reativos
  5- Fazer tudo se comunicar
  6- Aprender a debugar e resolver problemas
-_________________________________________________________________________________________________________________________________________________________________________
+_______________________________________________________________________________________________________________________________________________________________________
 
 🚶‍♂️ Etapa 1: Pensando como um Banco de Dados
 Vamos imaginar que você tem um caderno e quer anotar informações de pessoas. O que você precisa guardar?
@@ -41,4 +41,19 @@ Nome     | Texto (string)              | Pode repetir                           
 Idade    | Número inteiro (ou opcional)| Pode repetir                                 |
 CPF      | Texto (string, 11 dígitos)  | Deve ser único  			      |
 Email    | Texto                       | Pode ser único (depende da regra do sistema) |
-----------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
+
+_______________________________________________________________________________________________________________________________________________________________________
+
+# Agora vem uma pergunta importante para você pensar:
+
+🤔 Por que a gente usa um ID numérico automático em vez de usar o CPF como chave primária?
+(Responda com sua lógica — sem medo de errar. Pode pensar alto mesmo.)
+
+Depois que você responder isso, a gente já parte para criar essa tabela no SQL Server, via CREATE TABLE.
+Só que primeiro, quero te ajudar a pensar como o banco pensa 😉
+
+#RESPOSTA: 🧠 Conclusão (resposta para guardar):
+ -A gente usa ID numérico como chave primária porque ele é simples, rápido, leve, imutável e ideal para ser referência interna entre tabelas (relacionamentos).
+ -O CPF é uma informação única, sim, mas é do mundo real, e deve ser validado — não usado como chave.
+_______________________________________________________________________________________________________________________________________________________________________
