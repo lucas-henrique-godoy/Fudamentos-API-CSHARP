@@ -137,3 +137,56 @@ CPF: 12345678900
 Email: joao@email.com
 
 Lembrando: não precisa colocar o ID, porque ele é automático.
+
+#MEU COMANDO PARA INSERIR DADOS NA TABELA DE CADASTRO:
+INSERT INTO Pessoas
+    (PES_NOME,
+     PES_IDADE,
+     PES_CPF,
+     PES_EMAIL)
+VALUES
+    ('Lucas',
+     27,
+     '44003132053',
+     'lucas@email.com'
+);
+
+🧠 Explicação rápida:
+✅ A ordem dos campos está batendo com os valores.
+
+✅ Você não incluiu o ID, o que está certo, pois ele é gerado automaticamente.
+
+✅ Os valores de texto estão entre aspas simples '...', como deve ser.
+
+✅ A quebra de linha e indentação estão limpas e legíveis (ótimo hábito!).
+_______________________________________________________________________________________________________________________________________________________________________
+
+🎯DESAFIO 5: 
+Se você rodou esse comando e deu certo, o banco agora tem 1 pessoa cadastrada.
+
+Agora eu quero que você pense e escreva um comando SQL que:
+
+Mostre todas as pessoas cadastradas na tabela PESSOAS.
+Como seria isso?
+
+Dica: é um comando de leitura.
+Pense com calma. Não precisa escrever perfeito de primeira — só tenta.
+
+#MEU COMANDO PARA MOSTRAR TUDO: 
+SELECT * FROM Pessoas;
+
+Isso aí é o famoso: "Me mostra tudo de todo mundo que tem aí dentro dessa tabela."
+
+🔍 Quebra rápida do comando:
+SELECT → É o que você quer buscar.
+
+* → Quer dizer "todos os campos".
+
+FROM Pessoas → De qual tabela? Da tabela Pessoas.
+
+🧠 Dica de gente esperta:
+Quando seu banco tiver muitas colunas ou quando quiser performance ou organização, é melhor especificar só os campos que você quer, tipo:
+
+SELECT PES_NOME, PES_EMAIL FROM Pessoas;
+_______________________________________________________________________________________________________________________________________________________________________
+
