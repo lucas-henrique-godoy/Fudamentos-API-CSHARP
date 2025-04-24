@@ -2,4 +2,17 @@
   - Angular(Frontend)
   - ASP.NET Core com ADO.NET(Backend)
   - SQL Server(Banco de dados)  
+  - E entender o fluxo completo: do banco de dados até a tela,  e da tela até o banco de dados.
+_________________________________________________________________________________________________________________________________________________________________________
+
+#ETAPAS DA JORNADA (Vamos desbloquear aos poucos):
+ 1- Modelagem de banco de dados(começamos por aqui)
+ 2- Criar banco e tabela no SQL Server
+ 3- Criar API ASP.NET Core com ADO.NET(sem Entity Framework)
+ 4- Criar Frontend Angular simples com formulários reativos
+ 5- Fazer tudo se comunicar
+ 6- Aprender a debugar e resolver problemas
+_________________________________________________________________________________________________________________________________________________________________________
+
+
 	
