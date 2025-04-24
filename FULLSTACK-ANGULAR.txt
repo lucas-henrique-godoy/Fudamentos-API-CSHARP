@@ -57,3 +57,40 @@ Só que primeiro, quero te ajudar a pensar como o banco pensa 😉
  -A gente usa ID numérico como chave primária porque ele é simples, rápido, leve, imutável e ideal para ser referência interna entre tabelas (relacionamentos).
  -O CPF é uma informação única, sim, mas é do mundo real, e deve ser validado — não usado como chave.
 _______________________________________________________________________________________________________________________________________________________________________
+
+📦 O que vem antes de CREATE TABLE?
+Antes de criar qualquer tabela, você precisa criar um banco de dados onde essa tabela vai existir.
+
+🧠 Pense assim:
+O banco de dados é como um arquivo de Excel, e cada tabela é uma aba dentro desse arquivo.
+
+🔨 Desafio 2: Criar o banco de dados
+Tente escrever um comando SQL que cria um banco de dados chamado MeuSistema.
+
+Você consegue imaginar como seria?
+
+Dica: é bem simples, algo assim:
+
+comando: CREATE DATABASE NomeDoBanco;
+
+
+🧠 Tente você escrever agora o comando para criar um banco com nome MeuSistema.
+(E depois vamos para a criação da tabela PESSOAS dentro dele.)
+
+_______________________________________________________________________________________________________________________________________________________________________
+🧪 Desafio 3: Agora vamos criar essa tabela no SQL Server
+Vamos pensar: quais tipos de dados você colocaria em cada coluna?
+
+Por exemplo:
+
+-ID: inteiro (INT)
+
+-Nome: texto curto (VARCHAR)
+
+-Idade: número (INT)
+
+-CPF: texto de 11 caracteres (VARCHAR(11))
+
+-Email: texto (VARCHAR(100))
+
+🧠 Tente montar agora o comando CREATE TABLE PESSOAS com base nisso.
