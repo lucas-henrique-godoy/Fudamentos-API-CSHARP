@@ -190,3 +190,18 @@ Quando seu banco tiver muitas colunas ou quando quiser performance ou organizaç
 SELECT PES_NOME, PES_EMAIL FROM Pessoas;
 _______________________________________________________________________________________________________________________________________________________________________
 
+🤔 DESAFIO 6: E se você quiser ver apenas a pessoa com CPF = '44003132053'?
+Como seria esse comando?
+#MEU COMANDO PARA VER APENAS A PESSOA COM O CPF = '44003132053'
+SELECT* FROM Pessoas
+WHERE PES_CPF = '44003132053'
+
+🧠 O que você acabou de fazer aqui:
+Você fez uma consulta com filtro — pediu para o banco mostrar somente os registros que atendem a uma condição.
+
+📌 Esse tipo de filtro (WHERE) é a base para:
+Buscar por um CPF específico (como você fez)
+
+Buscar por ID (ex: WHERE PES_ID = 1)
+
+Buscar por nome, idade, e-mails... tudo!
