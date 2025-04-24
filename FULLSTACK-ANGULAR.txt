@@ -71,7 +71,9 @@ Você consegue imaginar como seria?
 
 Dica: é bem simples, algo assim:
 
-comando: CREATE DATABASE NomeDoBanco;
+COMANDO: CREATE DATABASE NomeDoBanco;
+
+#MEU COMADO PARA CRIAR MEU BANCO: CREATE DATABASE Cadastro;
 
 
 🧠 Tente você escrever agora o comando para criar um banco com nome MeuSistema.
@@ -94,3 +96,21 @@ Por exemplo:
 -Email: texto (VARCHAR(100))
 
 🧠 Tente montar agora o comando CREATE TABLE PESSOAS com base nisso.
+
+#MEU COMANDO PARA CRIAR A TABELA FOI ESSE:
+
+CREATE TABLE Pessoas(
+	PES_ID INT PRIMARY KEY IDENTITY(1,1),
+	PES_NOME VARCHAR(100),
+	PES_IDADE INT,
+	PES_CPF VARCHAR(11) UNIQUE,
+	PES_EMAIL VARCHAR(100)
+);
+
+📌 Explicações rápidas:
+IDENTITY(1,1) → significa: comece no 1, e vá somando de 1 em 1.
+
+A ordem IDENTITY → depois PRIMARY KEY é só questão de estilo. O SQL aceita das duas formas.
+
+VARCHAR(100) → você pode usar outro número, mas evite deixar muito grande ou muito pequeno.
+Por exemplo, VARCHAR(10) para nome talvez corte nomes como Fernanda ou Alessandro.
