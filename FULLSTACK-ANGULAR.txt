@@ -1,0 +1,5 @@
+#OBJETIVO GERAL: Aprender a criar aplicações Fullstack com:
+  - Angular(Frontend)
+  - ASP.NET Core com ADO.NET(Backend)
+  - SQL Server(Banco de dados)  
+	
