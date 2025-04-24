@@ -14,5 +14,31 @@ ________________________________________________________________________________
  6- Aprender a debugar e resolver problemas
 _________________________________________________________________________________________________________________________________________________________________________
 
+🚶‍♂️ Etapa 1: Pensando como um Banco de Dados
+Vamos imaginar que você tem um caderno e quer anotar informações de pessoas. O que você precisa guardar?
 
-	
+Desafio 1:
+Sem pensar em código ainda — imagine que você vai montar uma tabela no papel com informações de uma pessoa.
+O que você colocaria como colunas?
+
+Exemplo: Nome, Idade, Email... e mais o quê?
+
+🧠 Pense e me diga quais colunas você colocaria.
+(E também me diga se alguma dessas colunas pode ser repetida, ou se precisa ser única — tipo um CPF.)
+ R: Eu colocaria:
+- ID(único e não pode repetir)
+- Nome da pessoa
+- Idade da pessoa
+- CPF (Deve ser único e não pode repetir)
+- Email da pessoa
+
+#MODELO DE DADOS DESSA TABELA:
+---------------------------------------------------------------------------------------
+Coluna   | Tipo de dado esperado       | Regras					      |
+---------|-----------------------------|----------------------------------------------|
+ID       | Número inteiro              | Chave primária, único, gerado automático     |   
+Nome     | Texto (string)              | Pode repetir                                 |
+Idade    | Número inteiro (ou opcional)| Pode repetir                                 |
+CPF      | Texto (string, 11 dígitos)  | Deve ser único  			      |
+Email    | Texto                       | Pode ser único (depende da regra do sistema) |
+----------------------------------------------------------------------------------------
