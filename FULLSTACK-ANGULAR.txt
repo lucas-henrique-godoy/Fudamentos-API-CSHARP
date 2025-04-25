@@ -305,4 +305,64 @@ var pessoa = new Pessoa
 Você é quem faz o “meio de campo” entre o nome técnico do banco e o nome amigável da aplicação.
 
 Isso te dá liberdade de deixar o código mais bonito sem mexer na estrutura do banco.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CRIEI :
+ public class Pessoa
+ {
+     
+     public int PES_ID { get; set; }
+     public string PES_NOME { get; set; }
+     public int PES_IDADE { get; set; }
+     public string PES_CPF { get; set; }
+
+     public string PES_EMAIL { get; set; }
+ }
+
+
+O ChatGPT disse:
+🔧 Boa, você criou certinho! E isso mostra que você está mantendo os nomes iguais aos do banco, o que pode ajudar bastante no começo, especialmente se você ainda estiver se familiarizando com o mapeamento manual.
+
+Mas agora vou te fazer pensar, porque é assim que você vai aprender a se virar sozinho depois:
+
+🤔 Reflexão:
+Se você mantiver os nomes da model em C# iguais aos do banco, o que isso facilita?
+E o que pode dificultar mais pra frente?
+
+🧠 Dica pra você pensar:
+Quando for mostrar isso no Angular, o nome PES_NOME vai aparecer direto na resposta JSON da API.
+
+Acha bonito mostrar isso na tela?
+
+Seu colega de frontend vai entender que PES_EMAIL é o e-mail da pessoa?
+
+Se mais pra frente o padrão do banco mudar (ex: mudar de PES_ pra P_), o que acontece com o seu código?
+
+Se você quiser renomear o campo no C#, você pode fazer isso livremente, desde que saiba como ligar o nome do banco com o nome do código.
+
+💡 Resumo: dois caminhos possíveis
+
+Caminho	Model igual ao banco	Model com nomes mais limpos
+✅ Vantagem	Fácil de copiar/colar do banco	Código mais limpo e amigável
+⚠️ Desvantagem	JSON feio, código menos legível	Requer mapear os nomes manualmente
+📘 Exemplo de model “limpa”:
+csharp
+Copiar
+Editar
+public class Pessoa
+{
+    public int Id { get; set; }
+    public string Nome { get; set; }
+    public int Idade { get; set; }
+    public string Cpf { get; set; }
+    public string Email { get; set; }
+}
+Aí, no seu repositório com ADO.NET, você faz o "trabalho sujo" só uma vez:
+
+csharp
+Copiar
+Editar
+pessoa.Nome = reader["PES_NOME"].ToString();
+Quer continuar com os nomes iguais ao do banco por enquanto? Sem problema! É até bom pra você enxergar melhor a ligação.
+Mas só queria te fazer pensar como um programador mesmo. 😉
 
