@@ -238,3 +238,71 @@ Email
 Pensa como se fosse uma classe C# mesmo, com public, get, set etc.
 Manda ver! Não precisa estar perfeita, só tenta.
 
+------------------------------------------------------------------------------------------------------------------------------------
+
+os nomes das propridades da model do ackend  devem ser indenticos aos cmpos do banco?
+
+
+O ChatGPT disse:
+🔍 Ótima pergunta, e ela mostra que você está começando a pensar como um desenvolvedor de verdade!
+
+A resposta é:
+
+❌ Não precisam ser idênticos,
+✅ mas é importante que você saiba o que está mapeando.
+
+💡 Explicação como se fosse pra criança:
+Pensa assim:
+
+No banco, você chama a coluna de PES_NOME (porque tem um padrão de nome, né?).
+
+No código C#, você pode chamar isso de Nome.
+
+⚠️ Só que... o C# vai precisar saber que "Nome" no código = "PES_NOME" no banco.
+Se você usar ADO.NET puro, você é quem faz esse mapeamento "na mão" — ou seja, você vai escrever algo como:
+
+csharp
+Copiar
+Editar
+pessoa.Nome = reader["PES_NOME"].ToString();
+✅ Dica prática:
+No banco, siga o padrão da empresa (como PES_ID, PES_NOME, etc.).
+
+No código C#, use nomes mais simples e legíveis (como Id, Nome, Cpf), porque:
+
+Fica mais limpo
+
+Mais fácil de trabalhar no frontend depois
+
+Mais intuitivo
+
+🎓 Como seria a classe Pessoa em C#:
+csharp
+Copiar
+Editar
+public class Pessoa
+{
+    public int Id { get; set; }
+    public string Nome { get; set; }
+    public int Idade { get; set; }
+    public string Cpf { get; set; }
+    public string Email { get; set; }
+}
+E quando você buscar os dados do banco com ADO.NET, você só precisa mapear manualmente os campos:
+
+csharp
+Copiar
+Editar
+var pessoa = new Pessoa
+{
+    Id = Convert.ToInt32(reader["PES_ID"]),
+    Nome = reader["PES_NOME"].ToString(),
+    Idade = Convert.ToInt32(reader["PES_IDADE"]),
+    Cpf = reader["PES_CPF"].ToString(),
+    Email = reader["PES_EMAIL"].ToString()
+};
+🚀 Conclusão:
+Você é quem faz o “meio de campo” entre o nome técnico do banco e o nome amigável da aplicação.
+
+Isso te dá liberdade de deixar o código mais bonito sem mexer na estrutura do banco.
+
