@@ -206,3 +206,35 @@ Buscar por ID (ex: WHERE PES_ID = 1)
 
 Buscar por nome, idade, e-mails... tudo!
 _______________________________________________________________________________________________________________________________________________________________________
+
+🎯 Agora que você dominou a base do SQL, vamos organizar o próximo passo do nosso projeto fullstack:
+Aqui está um mini roadmap (que a gente já começou!):
+
+✅ Criar o banco e a tabela no SQL Server
+
+✅ Inserir e consultar dados com SQL
+
+✅ Pensar no modelo de dados no C# (classe Pessoa)
+
+🔜 Criar a API ASP.NET Core (endpoint GET, POST, etc)
+
+🔜 Fazer o Angular consumir essa API
+_______________________________________________________________________________________________________________________________________________________________________
+
+🧪 DESAFIO 7:
+Se você fosse criar uma classe em C# chamada Pessoa que representasse essa tabela, como ela seria?
+Lembra: você tem os campos:
+
+ID
+
+Nome
+
+Idade
+
+CPF
+
+Email
+
+Pensa como se fosse uma classe C# mesmo, com public, get, set etc.
+Manda ver! Não precisa estar perfeita, só tenta.
+
