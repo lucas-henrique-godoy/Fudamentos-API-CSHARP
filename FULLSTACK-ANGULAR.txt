@@ -603,9 +603,7 @@ Vamos organizar as ideias pra entender de verdade o porquê do problema, e o com
 🧩 Contexto do erro
 Você criou a classe Pessoa com os nomes de propriedade iguais aos nomes do banco, tipo:
 
-csharp
-Copiar
-Editar
+
 public int PES_ID { get; set; }
 Mas lembra que isso não é o ideal para APIs?
 
@@ -620,11 +618,9 @@ Para o banco	Para o JSON da API
 PES_ID	Id
 PES_NOME	Nome
 PES_IDADE	Idade
+
 Então, sua Pessoa.cs deve ficar assim, ó:
 
-csharp
-Copiar
-Editar
 public class Pessoa
 {
     public int Id { get; set; }
@@ -633,11 +629,9 @@ public class Pessoa
     public string Cpf { get; set; }
     public string Email { get; set; }
 }
+
 E a API vai gerar um JSON assim:
 
-json
-Copiar
-Editar
 {
   "id": 1,
   "nome": "Lucas",
@@ -645,13 +639,13 @@ Editar
   "cpf": "44003132053",
   "email": "lucas@email.com"
 }
+
 🧠 E como conectar com o banco depois?
 Quando for salvar no banco, você faz o "mapeamento" dentro da camada de acesso a dados (repositório), tipo:
 
-csharp
-Copiar
-Editar
+
 command.Parameters.AddWithValue("@PES_NOME", pessoa.Nome);
+
 Ou seja, só na hora de conversar com o banco você usa o nome do banco.
 Em todo o resto da aplicação, você usa nomes mais simples.
 
@@ -666,11 +660,6 @@ Acesse /Pessoa/ListarPessoas.
 
 Vai funcionar, e agora você está seguindo o padrão correto de modelagem da API.
 Você quer continuar assim ou prefere manter os nomes do banco na API (não recomendado, mas possível)?
-
-
-
-
-
 
 
 Você disse:
@@ -696,10 +685,6 @@ Clique no botão "Try it out" (Tentar).
 Depois clique em "Execute".
 
 Se sua API estiver conectada ao banco e tudo certo, ela vai retornar algo assim:
-
-json
-Copiar
-Editar
 [
   {
     "id": 1,
