@@ -337,6 +337,7 @@ Se você quiser renomear o campo no C#, você pode fazer isso livremente, desde 
 
 Caminho	Model igual ao banco			   |	Model com nomes mais limpos
 ✅ Vantagem	Fácil de copiar/colar do banco	   |	Código mais limpo e amigável
+						   |
 ⚠️ Desvantagem	JSON feio, código menos legível    |	Requer mapear os nomes manualmente
 
 
