@@ -335,13 +335,13 @@ Se você quiser renomear o campo no C#, você pode fazer isso livremente, desde 
 
 💡 Resumo: dois caminhos possíveis
 
-Caminho	Model igual ao banco	Model com nomes mais limpos
-✅ Vantagem	Fácil de copiar/colar do banco	Código mais limpo e amigável
-⚠️ Desvantagem	JSON feio, código menos legível	Requer mapear os nomes manualmente
+Caminho	Model igual ao banco			   |	Model com nomes mais limpos
+✅ Vantagem	Fácil de copiar/colar do banco	   |	Código mais limpo e amigável
+⚠️ Desvantagem	JSON feio, código menos legível    |	Requer mapear os nomes manualmente
+
+
 📘 Exemplo de model “limpa”:
-csharp
-Copiar
-Editar
+
 public class Pessoa
 {
     public int Id { get; set; }
@@ -352,9 +352,6 @@ public class Pessoa
 }
 Aí, no seu repositório com ADO.NET, você faz o "trabalho sujo" só uma vez:
 
-csharp
-Copiar
-Editar
 pessoa.Nome = reader["PES_NOME"].ToString();
 Quer continuar com os nomes iguais ao do banco por enquanto? Sem problema! É até bom pra você enxergar melhor a ligação.
 Mas só queria te fazer pensar como um programador mesmo. 😉
