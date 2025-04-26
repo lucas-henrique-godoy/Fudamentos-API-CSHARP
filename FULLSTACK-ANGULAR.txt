@@ -239,8 +239,7 @@ Pensa como se fosse uma classe C# mesmo, com public, get, set etc.
 Manda ver! Não precisa estar perfeita, só tenta.
 
 ------------------------------------------------------------------------------------------------------------------------------------
-
-os nomes das propridades da model do ackend  devem ser indenticos aos cmpos do banco?
+EU DISSE: os nomes das propridades da model do ackend  devem ser indenticos aos cmpos do banco?
 
 
 O ChatGPT disse:
