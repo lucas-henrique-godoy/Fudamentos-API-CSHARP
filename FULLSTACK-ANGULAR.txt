@@ -260,10 +260,8 @@ No código C#, você pode chamar isso de Nome.
 ⚠️ Só que... o C# vai precisar saber que "Nome" no código = "PES_NOME" no banco.
 Se você usar ADO.NET puro, você é quem faz esse mapeamento "na mão" — ou seja, você vai escrever algo como:
 
-csharp
-Copiar
-Editar
 pessoa.Nome = reader["PES_NOME"].ToString();
+
 ✅ Dica prática:
 No banco, siga o padrão da empresa (como PES_ID, PES_NOME, etc.).
 
@@ -276,9 +274,7 @@ Mais fácil de trabalhar no frontend depois
 Mais intuitivo
 
 🎓 Como seria a classe Pessoa em C#:
-csharp
-Copiar
-Editar
+
 public class Pessoa
 {
     public int Id { get; set; }
@@ -289,9 +285,7 @@ public class Pessoa
 }
 E quando você buscar os dados do banco com ADO.NET, você só precisa mapear manualmente os campos:
 
-csharp
-Copiar
-Editar
+
 var pessoa = new Pessoa
 {
     Id = Convert.ToInt32(reader["PES_ID"]),
