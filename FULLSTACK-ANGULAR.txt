@@ -709,6 +709,7 @@ Aprender a implementar o método POST para cadastrar uma nova pessoa na tabela?
 Ou preferir revisar primeiro como o método GET foi feito e o que exatamente está acontecendo dentro dele?
 
 Você escolhe o caminho, eu só vou te guiando com perguntas e dicas. 😉
+_______________________________________________________________________________________________________________________________________________________________________
 
 
 
