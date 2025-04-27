@@ -3,7 +3,7 @@
   - ASP.NET Core com ADO.NET(Backend)
   - SQL Server(Banco de dados)  
   - E entender o fluxo completo: do banco de dados até a tela,  e da tela até o banco de dados.
-_________________________________________________________________________________________________________________________________________________________________________
+_______________________________________________________________________________________________________________________________________________________________________
 
 #ETAPAS DA JORNADA (Vamos desbloquear aos poucos):
  1- Modelagem de banco de dados(começamos por aqui)
