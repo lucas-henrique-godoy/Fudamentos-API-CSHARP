@@ -694,6 +694,7 @@ Se sua API estiver conectada ao banco e tudo certo, ela vai retornar algo assim:
     "email": "lucas@email.com"
   }
 ]
+
 Se estiver vazio, tudo bem! Significa só que ainda não tem dados ou a consulta ainda não está pronta.
 
 🤔 O que você pode pensar agora:
