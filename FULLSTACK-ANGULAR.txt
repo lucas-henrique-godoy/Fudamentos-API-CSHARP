@@ -36,6 +36,7 @@
         * `POST`: Criar novos registros.
         * `PUT`: Atualizar registros existentes.
         * `DELETE`: Excluir registros.
+
 * **Estrutura de um Controller básico:**
     ```csharp
     [ApiController]
