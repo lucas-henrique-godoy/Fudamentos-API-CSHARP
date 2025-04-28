@@ -1,44 +1,483 @@
-# Anotações de Estudos: Desenvolvimento de Aplicações Fullstack com Angular, API ASP.NET Core, ADO.NET e SQL Server
+#OBJETIVO GERAL: Aprender a criar aplicações Fullstack com:
+  - Angular(Frontend)
+  - ASP.NET Core com ADO.NET(Backend)
+  - SQL Server(Banco de dados)  
+  - E entender o fluxo completo: do banco de dados até a tela,  e da tela até o banco de dados.
+_______________________________________________________________________________________________________________________________________________________________________
 
-## 1. Estrutura geral de uma aplicação Fullstack
-* **Frontend:** Interface de usuário construída com Angular.
-* **Backend:** API construída com ASP.NET Core.
-* **Banco de Dados:** Armazenamento de informações usando SQL Server.
-* **Comunicação:** O Angular faz requisições HTTP para a API (GET, POST, PUT, DELETE).
+#ETAPAS DA JORNADA (Vamos desbloquear aos poucos):
+ 1- Modelagem de banco de dados(começamos por aqui)
+ 2- Criar banco e tabela no SQL Server
+ 3- Criar API ASP.NET Core com ADO.NET(sem Entity Framework)
+ 4- Criar Frontend Angular simples com formulários reativos
+ 5- Fazer tudo se comunicar
+ 6- Aprender a debugar e resolver problemas
+_______________________________________________________________________________________________________________________________________________________________________
 
-## 2. Banco de Dados (SQL Server)
-* **Conceitos:**
-    * Cada tabela representa uma entidade (ex: `Pessoas`).
-    * Cada registro é uma linha da tabela.
-    * O `ID` é uma chave primária (`PRIMARY KEY`) única para identificar registros.
-    * Outros campos armazenam informações específicas (nome, idade, cpf, email).
-* **Exemplo:**
-    ```sql
-    CREATE DATABASE Cadastro;
+🚶‍♂ Etapa 1: Pensando como um Banco de Dados
+Vamos imaginar que você tem um caderno e quer anotar informações de pessoas. O que você precisa guardar?
 
-    CREATE TABLE Pessoas (
-        Id INT PRIMARY KEY IDENTITY(1,1),
-        Nome NVARCHAR(100) NOT NULL,
-        Idade INT,
-        Cpf NVARCHAR(11) UNIQUE NOT NULL,
-        Email NVARCHAR(100)
-    );
-    ```
-    * `IDENTITY(1,1)`: Faz o `Id` ser gerado automaticamente, começando em 1 e incrementando de 1 em 1.
+Desafio 1:
+Sem pensar em código ainda — imagine que você vai montar uma tabela no papel com informações de uma pessoa.
+O que você colocaria como colunas?
 
-## 3. API ASP.NET Core
-* **Conceitos:**
-    * **Controllers:** São "portas de entrada" da API, recebem requisições e devolvem respostas.
-    * **Models:** Representam os dados que trafegam na aplicação.
-    * **Rotas:** Caminhos de acesso à API (ex: `/pessoa/listarpessoas`).
-    * **Métodos HTTP:**
-        * `GET`: Buscar informações.
-        * `POST`: Criar novos registros.
-        * `PUT`: Atualizar registros existentes.
-        * `DELETE`: Excluir registros.
+Exemplo: Nome, Idade, Email... e mais o quê?
 
-* **Estrutura de um Controller básico:**
-    ```csharp
+🧠 Pense e me diga quais colunas você colocaria.
+(E também me diga se alguma dessas colunas pode ser repetida, ou se precisa ser única — tipo um CPF.)
+ R: Eu colocaria:
+- ID(único e não pode repetir)
+- Nome da pessoa
+- Idade da pessoa
+- CPF (Deve ser único e não pode repetir)
+- Email da pessoa
+
+#MODELO DE DADOS DESSA TABELA:
+---------------------------------------------------------------------------------------
+Coluna   | Tipo de dado esperado       | Regras					      |
+---------|-----------------------------|----------------------------------------------|
+ID       | Número inteiro              | Chave primária, único, gerado automático     |   
+Nome     | Texto (string)              | Pode repetir                                 |
+Idade    | Número inteiro (ou opcional)| Pode repetir                                 |
+CPF      | Texto (string, 11 dígitos)  | Deve ser único  			      |
+Email    | Texto                       | Pode ser único (depende da regra do sistema) |
+---------------------------------------------------------------------------------------
+
+_______________________________________________________________________________________________________________________________________________________________________
+
+# Agora vem uma pergunta importante para você pensar:
+
+🤔 Por que a gente usa um ID numérico automático em vez de usar o CPF como chave primária?
+(Responda com sua lógica — sem medo de errar. Pode pensar alto mesmo.)
+
+Depois que você responder isso, a gente já parte para criar essa tabela no SQL Server, via CREATE TABLE.
+Só que primeiro, quero te ajudar a pensar como o banco pensa 😉
+
+#RESPOSTA: 🧠 Conclusão (resposta para guardar):
+ -A gente usa ID numérico como chave primária porque ele é simples, rápido, leve, imutável e ideal para ser referência interna entre tabelas (relacionamentos).
+ -O CPF é uma informação única, sim, mas é do mundo real, e deve ser validado — não usado como chave.
+_______________________________________________________________________________________________________________________________________________________________________
+
+📦 O que vem antes de CREATE TABLE?
+Antes de criar qualquer tabela, você precisa criar um banco de dados onde essa tabela vai existir.
+
+🧠 Pense assim:
+O banco de dados é como um arquivo de Excel, e cada tabela é uma aba dentro desse arquivo.
+
+🔨 DESAFIO 2: Criar o banco de dados
+Tente escrever um comando SQL que cria um banco de dados chamado MeuSistema.
+
+Você consegue imaginar como seria?
+
+Dica: é bem simples, algo assim:
+
+COMANDO: CREATE DATABASE NomeDoBanco;
+
+#MEU COMADO PARA CRIAR MEU BANCO: CREATE DATABASE Cadastro;
+
+
+🧠 Tente você escrever agora o comando para criar um banco com nome MeuSistema.
+(E depois vamos para a criação da tabela PESSOAS dentro dele.)
+
+_______________________________________________________________________________________________________________________________________________________________________
+🧪 DESAFIO 3: Agora vamos criar essa tabela no SQL Server
+Vamos pensar: quais tipos de dados você colocaria em cada coluna?
+
+Por exemplo:
+
+-ID: inteiro (INT)
+
+-Nome: texto curto (VARCHAR)
+
+-Idade: número (INT)
+
+-CPF: texto de 11 caracteres (VARCHAR(11))
+
+-Email: texto (VARCHAR(100))
+
+🧠 Tente montar agora o comando CREATE TABLE PESSOAS com base nisso.
+
+#MEU COMANDO PARA CRIAR A TABELA FOI ESSE:
+
+CREATE TABLE Pessoas(
+	PES_ID INT PRIMARY KEY IDENTITY(1,1),
+	PES_NOME VARCHAR(100),
+	PES_IDADE INT,
+	PES_CPF VARCHAR(11) UNIQUE,
+	PES_EMAIL VARCHAR(100)
+);
+
+📌 Explicações rápidas:
+IDENTITY(1,1) → significa: comece no 1, e vá somando de 1 em 1.
+
+A ordem IDENTITY → depois PRIMARY KEY é só questão de estilo. O SQL aceita das duas formas.
+
+VARCHAR(100) → você pode usar outro número, mas evite deixar muito grande ou muito pequeno.
+Por exemplo, VARCHAR(10) para nome talvez corte nomes como Fernanda ou Alessandro.
+_______________________________________________________________________________________________________________________________________________________________________
+
+🧪 DESAFIO 4:
+Agora que:
+
+Você criou o banco
+
+Criou a tabela
+
+Me diga:
+Se você quisesse inserir uma nova pessoa na tabela, como você faria isso?
+
+🧠 Tente montar um INSERT INTO PESSOAS (...) VALUES (...) com os dados abaixo:
+
+Nome: João Silva
+
+Idade: 30
+
+CPF: 12345678900
+
+Email: joao@email.com
+
+Lembrando: não precisa colocar o ID, porque ele é automático.
+
+#MEU COMANDO PARA INSERIR DADOS NA TABELA DE CADASTRO:
+INSERT INTO Pessoas
+    (PES_NOME,
+     PES_IDADE,
+     PES_CPF,
+     PES_EMAIL)
+VALUES
+    ('Lucas',
+     27,
+     '44003132053',
+     'lucas@email.com'
+);
+
+🧠 Explicação rápida:
+✅ A ordem dos campos está batendo com os valores.
+
+✅ Você não incluiu o ID, o que está certo, pois ele é gerado automaticamente.
+
+✅ Os valores de texto estão entre aspas simples '...', como deve ser.
+
+✅ A quebra de linha e indentação estão limpas e legíveis (ótimo hábito!).
+_______________________________________________________________________________________________________________________________________________________________________
+
+🎯DESAFIO 5: 
+Se você rodou esse comando e deu certo, o banco agora tem 1 pessoa cadastrada.
+
+Agora eu quero que você pense e escreva um comando SQL que:
+
+Mostre todas as pessoas cadastradas na tabela PESSOAS.
+Como seria isso?
+
+Dica: é um comando de leitura.
+Pense com calma. Não precisa escrever perfeito de primeira — só tenta.
+
+#MEU COMANDO PARA MOSTRAR TUDO: 
+SELECT * FROM Pessoas;
+
+Isso aí é o famoso: "Me mostra tudo de todo mundo que tem aí dentro dessa tabela."
+
+🔍 Quebra rápida do comando:
+SELECT → É o que você quer buscar.
+
+* → Quer dizer "todos os campos".
+
+FROM Pessoas → De qual tabela? Da tabela Pessoas.
+
+🧠 Dica de gente esperta:
+Quando seu banco tiver muitas colunas ou quando quiser performance ou organização, é melhor especificar só os campos que você quer, tipo:
+
+SELECT PES_NOME, PES_EMAIL FROM Pessoas;
+_______________________________________________________________________________________________________________________________________________________________________
+
+🤔 DESAFIO 6: E se você quiser ver apenas a pessoa com CPF = '44003132053'?
+Como seria esse comando?
+#MEU COMANDO PARA VER APENAS A PESSOA COM O CPF = '44003132053'
+SELECT* FROM Pessoas
+WHERE PES_CPF = '44003132053'
+
+🧠 O que você acabou de fazer aqui:
+Você fez uma consulta com filtro — pediu para o banco mostrar somente os registros que atendem a uma condição.
+
+📌 Esse tipo de filtro (WHERE) é a base para:
+Buscar por um CPF específico (como você fez)
+
+Buscar por ID (ex: WHERE PES_ID = 1)
+
+Buscar por nome, idade, e-mails... tudo!
+_______________________________________________________________________________________________________________________________________________________________________
+
+🎯 Agora que você dominou a base do SQL, vamos organizar o próximo passo do nosso projeto fullstack:
+Aqui está um mini roadmap (que a gente já começou!):
+
+✅ Criar o banco e a tabela no SQL Server
+
+✅ Inserir e consultar dados com SQL
+
+✅ Pensar no modelo de dados no C# (classe Pessoa)
+
+🔜 Criar a API ASP.NET Core (endpoint GET, POST, etc)
+
+🔜 Fazer o Angular consumir essa API
+_______________________________________________________________________________________________________________________________________________________________________
+
+🧪 DESAFIO 7:
+Se você fosse criar uma classe em C# chamada Pessoa que representasse essa tabela, como ela seria?
+Lembra: você tem os campos:
+
+ID
+
+Nome
+
+Idade
+
+CPF
+
+Email
+
+Pensa como se fosse uma classe C# mesmo, com public, get, set etc.
+Manda ver! Não precisa estar perfeita, só tenta.
+
+------------------------------------------------------------------------------------------------------------------------------------
+EU DISSE: os nomes das propriedades da model do backend  devem ser idênticos aos campos do banco?
+
+
+O ChatGPT disse:
+🔍 Ótima pergunta, e ela mostra que você está começando a pensar como um desenvolvedor de verdade!
+
+A resposta é:
+
+❌ Não precisam ser idênticos,
+✅ mas é importante que você saiba o que está mapeando.
+
+💡 Explicação como se fosse pra criança:
+Pensa assim:
+
+No banco, você chama a coluna de PES_NOME (porque tem um padrão de nome, né?).
+
+No código C#, você pode chamar isso de Nome.
+
+⚠ Só que... o C# vai precisar saber que "Nome" no código = "PES_NOME" no banco.
+Se você usar ADO.NET puro, você é quem faz esse mapeamento "na mão" — ou seja, você vai escrever algo como:
+
+pessoa.Nome = reader["PES_NOME"].ToString();
+
+✅ Dica prática:
+No banco, siga o padrão da empresa (como PES_ID, PES_NOME, etc.).
+
+No código C#, use nomes mais simples e legíveis (como Id, Nome, Cpf), porque:
+
+Fica mais limpo
+
+Mais fácil de trabalhar no frontend depois
+
+Mais intuitivo
+
+🎓 Como seria a classe Pessoa em C#:
+
+public class Pessoa
+{
+    public int Id { get; set; }
+    public string Nome { get; set; }
+    public int Idade { get; set; }
+    public string Cpf { get; set; }
+    public string Email { get; set; }
+}
+E quando você buscar os dados do banco com ADO.NET, você só precisa mapear manualmente os campos:
+
+
+var pessoa = new Pessoa
+{
+    Id = Convert.ToInt32(reader["PES_ID"]),
+    Nome = reader["PES_NOME"].ToString(),
+    Idade = Convert.ToInt32(reader["PES_IDADE"]),
+    Cpf = reader["PES_CPF"].ToString(),
+    Email = reader["PES_EMAIL"].ToString()
+};
+🚀 Conclusão:
+Você é quem faz o “meio de campo” entre o nome técnico do banco e o nome amigável da aplicação.
+
+Isso te dá liberdade de deixar o código mais bonito sem mexer na estrutura do banco.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CRIEI :
+ public class Pessoa
+ {
+     
+     public int PES_ID { get; set; }
+     public string PES_NOME { get; set; }
+     public int PES_IDADE { get; set; }
+     public string PES_CPF { get; set; }
+
+     public string PES_EMAIL { get; set; }
+ }
+
+
+O ChatGPT disse:
+🔧 Boa, você criou certinho! E isso mostra que você está mantendo os nomes iguais aos do banco, o que pode ajudar bastante no começo, especialmente se você ainda estiver se familiarizando com o mapeamento manual.
+
+Mas agora vou te fazer pensar, porque é assim que você vai aprender a se virar sozinho depois:
+
+🤔 Reflexão:
+Se você mantiver os nomes da model em C# iguais aos do banco, o que isso facilita?
+E o que pode dificultar mais pra frente?
+
+🧠 Dica pra você pensar:
+Quando for mostrar isso no Angular, o nome PES_NOME vai aparecer direto na resposta JSON da API.
+
+Acha bonito mostrar isso na tela?
+
+Seu colega de frontend vai entender que PES_EMAIL é o e-mail da pessoa?
+
+Se mais pra frente o padrão do banco mudar (ex: mudar de PES_ pra P_), o que acontece com o seu código?
+
+Se você quiser renomear o campo no C#, você pode fazer isso livremente, desde que saiba como ligar o nome do banco com o nome do código.
+
+💡 Resumo: dois caminhos possíveis
+
+Caminho	Model igual ao banco			   |	Model com nomes mais limpos
+						   |
+✅ Vantagem	Fácil de copiar/colar do banco	   |	Código mais limpo e amigável
+						   |
+⚠ Desvantagem	JSON feio, código menos legível    |	Requer mapear os nomes manualmente
+
+
+📘 Exemplo de model “limpa”:
+
+public class Pessoa
+{
+    public int Id { get; set; }
+    public string Nome { get; set; }
+    public int Idade { get; set; }
+    public string Cpf { get; set; }
+    public string Email { get; set; }
+}
+
+Aí, no seu repositório com ADO.NET, você faz o "trabalho sujo" só uma vez: pessoa.Nome = reader["PES_NOME"].ToString();
+
+Quer continuar com os nomes iguais ao do banco por enquanto? Sem problema! É até bom pra você enxergar melhor a ligação.
+Mas só queria te fazer pensar como um programador mesmo. 😉
+_______________________________________________________________________________________________________________________________________________________________________
+
+🚀 Desafio 8:
+Crie o seu primeiro PessoaController.cs, com um endpoint GET chamado ListarPessoas, que retorna uma lista de Pessoa com dados falsos (só pra testar).
+
+Não conecta com banco ainda. Só retorna uma lista “hardcoded” tipo assim:
+
+[HttpGet]
+public IEnumerable<Pessoa> ListarPessoas()
+{
+    return new List<Pessoa>
+    {
+        new Pessoa { PES_ID = 1, PES_NOME = "Lucas", PES_IDADE = 27, PES_CPF = "44003132053", PES_EMAIL = "lucas@email.com" }
+    };
+}
+_______________________________________________________________________________________________________________________________________________________________________
+
+Eu disse: mas e os arquivos WeatherForecastController.cs e WeatherForecast.cs que foram criados automaticmente?
+
+
+O ChatGPT disse:
+🎯 Excelente pergunta, mestre padawan do fullstack!
+
+Esses dois arquivos aparecem quando você cria um projeto do tipo Web API com template padrão. Eles estão ali só pra servir como exemplo de como uma API funciona.
+
+Vamos entender os dois rapidinho como se fosse pra uma criança — com comparações 🍭:
+
+🗂 WeatherForecast.cs
+Esse é só uma classe model. Pensa nele como o “molde” de uma previsão do tempo.
+
+csharp
+Copiar
+Editar
+public class WeatherForecast
+{
+    public DateTime Date { get; set; }
+    public int TemperatureC { get; set; }
+    public string Summary { get; set; }
+}
+🧠 Serve pra:
+
+Representar os dados que serão enviados/recebidos pela API.
+
+Igualzinho sua Pessoa.cs, mas com dados de tempo.
+
+📡 WeatherForecastController.cs
+Esse é um controller de exemplo. Ele mostra como funciona um endpoint:
+
+[ApiController]
+[Route("[controller]")]
+public class WeatherForecastController : ControllerBase
+{
+    [HttpGet]
+    public IEnumerable<WeatherForecast> Get()
+    {
+        // Retorna dados simulados de previsão do tempo
+    }
+}
+🧠 Serve pra:
+
+Mostrar como retornar uma lista de dados pela rota /WeatherForecast
+
+Mostrar como o C# transforma uma lista em JSON e envia pro navegador
+
+🔥 Você pode apagar?
+✅ Sim! Se quiser deixar o projeto limpo pra começar o seu PessoaController, pode apagar sem medo:
+Delete WeatherForecast.cs
+
+Delete WeatherForecastController.cs
+
+Delete também o using que estiver referenciando WeatherForecast no Program.cs (se tiver)
+
+Assim seu projeto fica mais organizado e você não confunde exemplos com o que você mesmo está construindo.
+
+📌 Resumo prático:
+
+Arquivo	Serve pra quê?						Posso apagar?
+
+WeatherForecast.cs	Modelo de exemplo			✅ Sim
+
+WeatherForecastController.cs	Endpoint de exemplo		✅ Sim
+
+
+Me avisa quando tiver limpado tudo e criado seu PessoaController! 👨‍🏫 Depois disso a gente liga ele ao banco e começa a voar. 🚀
+_______________________________________________________________________________________________________________________________________________________________________
+
+me ensine a criar aquele endpoint de exemplo 
+
+
+O ChatGPT disse:
+Perfeito! Agora que você limpou os exemplos do template e está pronto pra criar seu próprio endpoint, vamos fazer isso juntos, passo a passo — como se você estivesse montando um brinquedo de LEGO. 🧱
+
+🚀 Objetivo:
+Criar um endpoint chamado ListarPessoas, que retorna uma lista "falsa" de pessoas — sem banco ainda, só pra aprender o fluxo.
+
+👣 Passo 1: Criar a classe Pessoa
+Se ainda não criou, crie um arquivo chamado Pessoa.cs dentro da pasta Models (ou direto no projeto se ainda não criou pastas):
+
+csharp
+Copiar
+Editar
+public class Pessoa
+{
+    public int PES_ID { get; set; }
+    public string PES_NOME { get; set; }
+    public int PES_IDADE { get; set; }
+    public string PES_CPF { get; set; }
+    public string PES_EMAIL { get; set; }
+}
+👣 Passo 2: Criar a classe PessoaController
+Crie um novo arquivo chamado PessoaController.cs na pasta Controllers.
+E copie esse exemplo básico:
+
+csharp
+Copiar
+Editar
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+
+namespace CadastroAPI.Controllers
+{
     [ApiController]
     [Route("[controller]")]
     public class PessoaController : ControllerBase
@@ -48,60 +487,432 @@
         {
             var lista = new List<Pessoa>
             {
-                new Pessoa { Id = 1, Nome = "Lucas", Idade = 27, Cpf = "44003132053", Email = "lucas@email.com" },
-                new Pessoa { Id = 2, Nome = "Mariana", Idade = 31, Cpf = "11223344556", Email = "mariana@email.com" }
+                new Pessoa { PES_ID = 1, PES_NOME = "Lucas", PES_IDADE = 27, PES_CPF = "44003132053", PES_EMAIL = "lucas@email.com" },
+                new Pessoa { PES_ID = 2, PES_NOME = "Mariana", PES_IDADE = 31, PES_CPF = "11223344556", PES_EMAIL = "mariana@email.com" }
             };
 
             return lista;
         }
     }
-    ```
-* **Importante:**
-    * O nome das propriedades da Model devem estar em PascalCase (`Id`, `Nome`, etc.) para o JSON ficar mais "legível".
-    * O Swagger gera automaticamente uma documentação da API para testes.
+}
+👣 Passo 3: Rodar e testar
+Clique no ▶ pra rodar o projeto.
 
-## 4. Frontend com Angular (conceitos iniciais)
-* **Componentes:** Partes visuais (página de cadastro, tabela de pessoas).
-* **Serviços:** Responsáveis por fazer requisições HTTP para a API.
-* **Roteamento:** Gerenciar as telas da aplicação.
-* **Formulários:** Reativos ou template-driven para capturar dados do usuário.
-* **Fluxo básico de funcionamento:**
-    1.  O usuário interage com o Angular.
-    2.  O Angular chama um serviço que faz uma requisição para a API.
-    3.  A API processa a requisição (lê/escreve no banco) e responde.
-    4.  O Angular recebe a resposta e atualiza a tela.
+Abra o navegador ou o Postman.
 
-## 5. ADO.NET (Acesso a dados na API)
-* `SqlConnection`: Abre conexão com o banco.
-* `SqlCommand`: Executa comandos SQL (`INSERT`, `SELECT`, etc.).
-* `SqlDataReader`: Lê resultados de consultas.
-* **Exemplo básico:**
-    ```csharp
-    using(SqlConnection conn = new SqlConnection("sua_connection_string"))
+Vá para:
+
+arduino
+Copiar
+Editar
+https://localhost:5001/Pessoa/ListarPessoas
+🔁 (Pode ser http://localhost:port/Pessoa/ListarPessoas dependendo da sua porta)
+
+Se tudo estiver certo, você verá um JSON com as pessoas simuladas! 🎉
+
+🧠 Pensamento pra você refletir:
+O que esse endpoint está retornando?
+
+Qual seria a diferença se ele estivesse pegando dados do banco?
+
+Como o nome da classe influencia na rota da URL?
+
+Me avisa quando funcionar ou se der algum erro! Depois a gente faz ele buscar do banco de verdade com SqlConnection. 👨‍💻
+
+DEU O SEGUINTE ERRO:
+Severity	Code	Description	Project	File	Line	Suppression State
+Error (active)	CS0117	'Pessoa' does not contain a definition for 'PES_ID'	CadastroAPI	C:\Users\lucas\OneDrive\Área de Trabalho\Fudamentos-API-CSHARP\PrimeiraAPI\PrimeiraAPI\Controllers\PessoaController.cs	17	
+Error (active)	CS0117	'Pessoa' does not contain a definition for 'PES_IDADE'	CadastroAPI	C:\Users\lucas\OneDrive\Área de Trabalho\Fudamentos-API-CSHARP\PrimeiraAPI\PrimeiraAPI\Controllers\PessoaController.cs	16	
+Error (active)	CS0117	'Pessoa' does not contain a definition for 'PES_IDADE'	CadastroAPI	C:\Users\lucas\OneDrive\Área de Trabalho\Fudamentos-API-CSHARP\PrimeiraAPI\PrimeiraAPI\Controllers\PessoaController.cs	17	
+Error (active)	CS0117	'Pessoa' does not contain a definition for 'PES_NOME'	CadastroAPI	C:\Users\lucas\OneDrive\Área de Trabalho\Fudamentos-API-CSHARP\PrimeiraAPI\PrimeiraAPI\Controllers\PessoaController.cs	16	
+Error (active)	CS0117	'Pessoa' does not contain a definition for 'PES_NOME'	CadastroAPI	C:\Users\lucas\OneDrive\Área de Trabalho\Fudamentos-API-CSHARP\PrimeiraAPI\PrimeiraAPI\Controllers\PessoaController.cs	17	
+
+
+Boa! Isso mostra que você já está aprendendo a ler os erros — e isso é uma das habilidades mais valiosas de quem programa de verdade. 🧠💡
+
+Vamos resolver isso do jeito certo e refletir sobre por que o erro aconteceu.
+
+🚨 O que o erro está dizendo?
+O erro CS0117: 'Pessoa' does not contain a definition for 'PES_ID' significa:
+
+"A classe Pessoa que você está tentando usar não tem uma propriedade chamada PES_ID."
+
+Ou seja: o C# está tentando encontrar essas propriedades dentro da classe Pessoa, mas elas não existem no arquivo que ele está vendo.
+
+🎯 1. Primeira coisa que você deve fazer:
+🔍 Abrir sua classe Pessoa.cs e conferir se ela realmente está assim:
+
+csharp
+Copiar
+Editar
+public class Pessoa
+{
+    public int PES_ID { get; set; }
+    public string PES_NOME { get; set; }
+    public int PES_IDADE { get; set; }
+    public string PES_CPF { get; set; }
+    public string PES_EMAIL { get; set; }
+}
+Verifique com atenção:
+
+✅ As propriedades existem?
+✅ Estão com o nome certo? (letra maiúscula importa em C#)
+✅ O arquivo realmente se chama Pessoa.cs?
+✅ Ele está dentro da namespace certa? (a mesma do controller ou com using correto no topo do controller)
+
+🧠 Reflexão de desenvolvedor:
+Por que o C# reclamou das propriedades se eu escrevi os nomes certos no controller?
+
+Porque talvez:
+
+A classe não está no mesmo lugar, ou
+
+O controller não está "vendo" a classe, ou
+
+O nome da propriedade está diferente (por exemplo, Idade ao invés de PES_IDADE)
+
+✅ O que fazer agora?
+Confirme o conteúdo do seu Pessoa.cs
+
+No topo do seu PessoaController.cs, adicione isso, se ainda não tiver:
+
+csharp
+Copiar
+Editar
+using PrimeiraAPI.Models; // ou o namespace onde sua classe Pessoa está
+(O nome pode variar dependendo de onde está seu arquivo Pessoa.cs)
+
+Se quiser, cola aqui o conteúdo completo do seu Pessoa.cs e o começo do seu PessoaController.cs, que eu te digo exatamente onde está o erro — mas tenta primeiro! Você está bem perto. Bora? 🚀
+
+
+
+
+
+
+
+
+Você disse:
+mas voce mesmo disse que eu nao poderia colocar a model assim pois fica inelegivel no arquivo json
+
+
+O ChatGPT disse:
+EXATAMENTE! E olha que incrível: você acabou de vivenciar, na prática, o que acontece quando misturamos conceitos de banco de dados com boas práticas de API.
+
+Vamos organizar as ideias pra entender de verdade o porquê do problema, e o como resolver da forma mais didática possível:
+
+🧩 Contexto do erro
+Você criou a classe Pessoa com os nomes de propriedade iguais aos nomes do banco, tipo:
+
+
+public int PES_ID { get; set; }
+Mas lembra que isso não é o ideal para APIs?
+
+Porque APIs normalmente usam nomes mais amigáveis no JSON: id, nome, idade, etc.
+Mas bancos usam nomes com prefixos: PES_ID, PES_NOME, etc.
+
+✅ A solução mais saudável
+A gente separa as duas responsabilidades:
+
+
+Para o banco	Para o JSON da API
+PES_ID	Id
+PES_NOME	Nome
+PES_IDADE	Idade
+
+Então, sua Pessoa.cs deve ficar assim, ó:
+
+public class Pessoa
+{
+    public int Id { get; set; }
+    public string Nome { get; set; }
+    public int Idade { get; set; }
+    public string Cpf { get; set; }
+    public string Email { get; set; }
+}
+
+E a API vai gerar um JSON assim:
+
+{
+  "id": 1,
+  "nome": "Lucas",
+  "idade": 27,
+  "cpf": "44003132053",
+  "email": "lucas@email.com"
+}
+
+🧠 E como conectar com o banco depois?
+Quando for salvar no banco, você faz o "mapeamento" dentro da camada de acesso a dados (repositório), tipo:
+
+
+command.Parameters.AddWithValue("@PES_NOME", pessoa.Nome);
+
+Ou seja, só na hora de conversar com o banco você usa o nome do banco.
+Em todo o resto da aplicação, você usa nomes mais simples.
+
+💬 O que você deve fazer agora:
+Renomeie a classe Pessoa para nomes amigáveis (como acima).
+
+Atualize seu PessoaController com os nomes novos (Nome, Idade, etc).
+
+Rode a API de novo.
+
+Acesse /Pessoa/ListarPessoas.
+
+Vai funcionar, e agora você está seguindo o padrão correto de modelagem da API.
+Você quer continuar assim ou prefere manter os nomes do banco na API (não recomendado, mas possível)?
+
+
+Você disse:
+abriu o swagger
+
+
+O ChatGPT disse:
+Boa! Se o Swagger abriu, isso é um ótimo sinal: sua API está rodando sem erros de compilação, e o endpoint está pronto pra ser testado. 🔥
+
+Agora vamos por partes pra entender o que você tem em mãos e o que fazer com isso:
+
+✅ O que é o Swagger?
+É uma ferramenta automática de documentação que aparece quando você roda uma Web API ASP.NET Core.
+Ele mostra todos os endpoints da API, os métodos disponíveis (GET, POST, etc.), e permite até testar os endpoints direto no navegador!
+
+🧪 Vamos testar seu endpoint?
+Se você criou um endpoint de exemplo como GET /Pessoa/ListarPessoas, então:
+
+No Swagger, clique no método GET chamado ListarPessoas.
+
+Clique no botão "Try it out" (Tentar).
+
+Depois clique em "Execute".
+
+Se sua API estiver conectada ao banco e tudo certo, ela vai retornar algo assim:
+[
+  {
+    "id": 1,
+    "nome": "Lucas",
+    "idade": 27,
+    "cpf": "44003132053",
+    "email": "lucas@email.com"
+  }
+]
+
+Se estiver vazio, tudo bem! Significa só que ainda não tem dados ou a consulta ainda não está pronta.
+
+🤔 O que você pode pensar agora:
+Já consigo listar dados da tabela Pessoas?
+
+Já consigo cadastrar (POST)?
+
+Quero agora implementar o POST para salvar uma nova pessoa?
+
+💡 Te pergunto: você quer agora:
+Aprender a implementar o método POST para cadastrar uma nova pessoa na tabela?
+
+Ou preferir revisar primeiro como o método GET foi feito e o que exatamente está acontecendo dentro dele?
+
+Você escolhe o caminho, eu só vou te guiando com perguntas e dicas. 😉
+_______________________________________________________________________________________________________________________________________________________________________
+
+💡 Te pergunto: você quer agora:
+Aprender a implementar o método POST para cadastrar uma nova pessoa na tabela?
+
+Ou preferir revisar primeiro como o método GET foi feito e o que exatamente está acontecendo dentro dele?
+
+Você escolhe o caminho, eu só vou te guiando com perguntas e dicas. 😉
+
+
+
+
+
+
+
+Você disse:
+quero  revisar o metoo get e sua estrutua, preciso entender ,melhor a questao das rotas, o metodo get e comoc ria-lo, para que eu consiga fazer isso sozinho sempre
+
+
+O ChatGPT disse:
+Perfeito! Você está no caminho mais certo possível: entender profundamente o método GET e as rotas da API é a base pra você dominar qualquer outro método depois.
+
+Vamos quebrar isso como se estivéssemos ensinando para uma criança. 🧸
+
+🧠 Primeira pergunta pra você mesmo:
+O que eu quero que a API me entregue quando alguém fizer um GET?
+
+No seu caso:
+
+Quero que a API me entregue todas as pessoas cadastradas no banco.
+
+📦 Estrutura básica de um Controller com GET
+No ASP.NET Core, tudo começa com um Controller.
+
+Exemplo básico:
+
+csharp
+Copiar
+Editar
+[ApiController]
+[Route("[controller]")]
+public class PessoaController : ControllerBase
+{
+    [HttpGet("ListarPessoas")]
+    public IActionResult ListarPessoas()
     {
-        conn.Open();
-        SqlCommand cmd = new SqlCommand("SELECT * FROM Pessoas", conn);
-        SqlDataReader reader = cmd.ExecuteReader();
-        while(reader.Read())
+        // Aqui você buscaria os dados no banco e retornaria
+        var pessoas = new List<Pessoa>
         {
-            var nome = reader["Nome"].ToString();
-            var idade = (int)reader["Idade"];
-        }
+            new Pessoa { Id = 1, Nome = "Lucas", Idade = 27, Cpf = "44003132053", Email = "lucas@email.com" }
+        };
+
+        return Ok(pessoas);
     }
-    ```
+}
+🧭 Vamos entender cada parte
+🔹 [ApiController]
+Isso diz ao .NET que esse arquivo é um controller de API, e ativa comportamentos automáticos (como validação de entrada, etc).
 
-## 6. Pensamento de Desenvolvimento
-1.  **Primeiro:** Pensar na estrutura do dado (modelagem simples).
-2.  **Depois:** Pensar nos endpoints da API necessários (GET, POST, etc.).
-3.  **Depois:** Pensar no frontend (como vai buscar e mostrar os dados).
+🔹 [Route("[controller]")]
+Essa é a rota base da sua API.
 
-## 7. Boas práticas iniciais
-* Nomear tabelas no plural (`Pessoas`).
-* Nomear propriedades no singular e em PascalCase (`Id`, `Nome`, etc.).
-* Validar dados básicos (não permitir CPF repetido, etc.).
-* Começar simples: CRUD completo para uma única tabela.
+[controller] significa que ele vai usar o nome da classe sem o "Controller", ou seja:
 
-## [Próximos passos sugeridos]
-* Criar o endpoint POST para cadastrar pessoa.
-* Conectar a API ao banco usando ADO.NET.
-* Criar uma página Angular para listar pessoas chamando a API.
+PessoaController → rota será /Pessoa
+
+Então a URL final do seu endpoint vai ser:
+
+GET /Pessoa/ListarPessoas
+
+🔹 [HttpGet("ListarPessoas")]
+Esse atributo está dizendo:
+
+Quando alguém fizer um GET na rota /Pessoa/ListarPessoas, execute este método.
+
+🔹 IActionResult ListarPessoas()
+Este é o método que será executado quando essa rota for chamada.
+
+Ele pode retornar qualquer tipo de resultado HTTP: 200 (Ok), 404 (NotFound), 500 (Erro), etc.
+
+🔹 return Ok(pessoas);
+Isso diz:
+
+Retorna um código 200 OK com os dados no corpo da resposta.
+
+✍ Sua missão agora:
+Responder essas perguntinhas simples pra você mesmo:
+
+Qual o nome da rota base do meu controller?
+
+Qual o nome da rota que estou adicionando no [HttpGet(...)]?
+
+O que esse método retorna se for chamado?
+
+Se quiser, me mostra o código exato do seu PessoaController que você criou, e eu vou te perguntar coisas sobre ele em vez de te dar respostas prontas.
+Topa?
+
+
+
+
+
+
+
+Você disse:
+using CadastroAPI.Model;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+
+namespace CadastroAPI.Controllers
+{
+    [ApiController]
+    [Route("[controller]")]
+    public class PessoaController:ControllerBase
+    {
+        [HttpGet("ListarPessoas")]
+        public IEnumerable<Pessoa> ListarPessoas()
+        {
+            var lista = new List<Pessoa>
+            {
+                new Pessoa {Id = 1, Nome = "Lucas", Idade = 27, Cpf = "44003132053",  Email = "lucas@email.com"},
+                new Pessoa {Id = 2, Nome = "Mariana", Idade = 31, Cpf = "11223344556", Email = "mariana@email.com" }
+            };
+
+            return lista;
+        }
+        
+    }
+}
+
+
+O ChatGPT disse:
+Excelente! Agora estamos com o código real em mãos. 👏
+Vamos juntos destrinchar ele, sem pressa.
+
+🧠 Primeiro, algumas perguntas para você pensar:
+1. Qual é a rota completa para acessar esse seu método ListarPessoas?
+(Pensa assim: pega o que está no [Route] + [HttpGet].)
+
+2. Quando alguém acessar essa rota, o que exatamente a API vai devolver?
+
+3. O que acontece se você adicionar mais uma pessoa dentro da lista lista?
+
+📚 Explicando o seu PessoaController parte por parte:
+
+Parte	Explicação
+
+[ApiController]	Diz que esta classe é um Controller de API, ativa algumas facilidades (como validação automática).
+
+[Route("[controller]")]	Define que a rota base será /Pessoa, porque o nome da classe é PessoaController.
+
+public class PessoaController : ControllerBase	Cria a classe Controller que herda comportamentos básicos de uma API.
+
+[HttpGet("ListarPessoas")]	Diz que o método abaixo responde a uma requisição HTTP GET em /Pessoa/ListarPessoas.
+
+public IEnumerable<Pessoa> ListarPessoas()	Cria o método que vai ser executado quando o usuário acessar essa rota.
+
+return lista;	Retorna a lista de pessoas como resposta da API (automaticamente em JSON).
+
+🎯 De forma simples:
+Quando alguém acessar GET /Pessoa/ListarPessoas,
+o sistema vai criar uma lista na hora (em memória) e devolver em formato JSON.
+
+🧪 Teste mental rápido:
+Se eu tirar o atributo [HttpGet("ListarPessoas")] e deixar só [HttpGet], qual seria a nova URL para chamar esse método? 🤔
+
+(pensa que [HttpGet] sem nada usa a rota padrão baseada no nome do método)
+
+Responde essa, e a gente já pode seguir pro próximo nível:
+fazer um POST (para cadastrar uma nova pessoa de verdade, em vez de só listar no código). 🚀
+
+Quer?
+
+Você disse:
+eu nao entendi a pergunta?
+
+
+O ChatGPT disse:
+Perfeito, vamos com calma então. 🙏
+Vou te explicar de outro jeito:
+
+Olha só:
+Hoje o seu método está assim:
+
+
+[HttpGet("ListarPessoas")]
+public IEnumerable<Pessoa> ListarPessoas()
+Isso significa que para chamar esse método no navegador ou no Swagger,
+você acessa:
+
+
+/Pessoa/ListarPessoas
+Beleza?
+
+Agora imagina:
+Se você tirasse "ListarPessoas" do [HttpGet] e deixasse só:
+
+[HttpGet]
+public IEnumerable<Pessoa> ListarPessoas()
+Pergunta:
+Qual seria a URL (rota) para acessar esse método agora?
+
+Dica:
+
+[Route("[controller]")] usa o nome do controller (sem o "Controller") → /Pessoa
+
+[HttpGet] sem parâmetro usa o nome do método, mas na rota final ele se mistura com a base.
