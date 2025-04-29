@@ -917,3 +917,47 @@ Dica:
 [Route("[controller]")] usa o nome do controller (sem o "Controller") → /Pessoa
 
 [HttpGet] sem parâmetro usa o nome do método, mas na rota final ele se mistura com a base.
+
+📚 Explicando:
+A pergunta era:
+
+"Se eu tirar o "ListarPessoas" do [HttpGet("ListarPessoas")] e deixar apenas [HttpGet], qual seria a nova URL?"
+
+🧠 Resposta:
+Se você tira o "ListarPessoas" e deixa só [HttpGet]
+
+E o seu controller ainda está com [Route("[controller]")]
+
+E o nome do controller é PessoaController
+
+Então a nova URL para chamar o seu método será:
+
+Copiar
+Editar
+/Pessoa
+(sem o /ListarPessoas no final!)
+
+🛠️ Recapitulando o que está acontecendo:
+O sistema ASP.NET Core entende as rotas assim:
+
+[Route("[controller]")] ➔ o nome do controller sem "Controller" vira a rota base (Pessoa)
+
+[HttpGet] sem parâmetro ➔ o método responde na rota base
+
+Se [HttpGet("algo")], ele acrescenta "algo" depois da rota base.
+
+🧹 Em resumo:
+
+Antes	Depois
+[HttpGet("ListarPessoas")] ➔ /Pessoa/ListarPessoas	[HttpGet] ➔ /Pessoa
+📣 Uma dica de ouro:
+Essa combinação é muito poderosa porque você começa a fazer APIs RESTful bonitinhas:
+
+
+Ação	Verbo HTTP	Rota Exemplo
+Listar todas as pessoas	GET	/Pessoa
+Buscar uma pessoa pelo ID	GET	/Pessoa/{id}
+Criar nova pessoa	POST	/Pessoa
+Atualizar uma pessoa	PUT	/Pessoa/{id}
+Excluir uma pessoa	DELETE	/Pessoa/{id}
+➡️ Cada ação usa o verbo certo + rota padrão.
