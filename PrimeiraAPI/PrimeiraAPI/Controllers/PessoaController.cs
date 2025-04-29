@@ -32,7 +32,7 @@ namespace CadastroAPI.Controllers
             var Pessoa = lista.FirstOrDefault(p => p.Id == id);
             if(Pessoa == null)
             {
-                return NotFound(); //Retorna erro 404 se nãoa achou
+                return NotFound(); //Retorna erro 404 se não achou
             }
 
             return Ok(Pessoa);
