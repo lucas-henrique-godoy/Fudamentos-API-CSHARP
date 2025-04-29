@@ -1167,3 +1167,6 @@ Conceito	Explicação
 ActionResult<T>	Permite retornar sucesso (Ok) ou erro (NotFound).
 FirstOrDefault	Busca o primeiro item que combina ou retorna null.
 Validação de null	Sempre que buscar no banco ou lista, cheque se veio algo!
+_______________________________________________________________________________________________________________________________________________________________________
+
+
