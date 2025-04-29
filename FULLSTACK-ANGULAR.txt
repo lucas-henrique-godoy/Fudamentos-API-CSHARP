@@ -961,3 +961,67 @@ Criar nova pessoa	POST	/Pessoa
 Atualizar uma pessoa	PUT	/Pessoa/{id}
 Excluir uma pessoa	DELETE	/Pessoa/{id}
 ➡️ Cada ação usa o verbo certo + rota padrão.
+
+🎯 Nosso objetivo:
+Criar um endpoint GET que busca uma única pessoa pelo ID.
+
+Exemplo:
+Se você chamar no navegador ou Postman /Pessoa/1, ele traz a pessoa com Id = 1.
+
+📋 Passo a passo com Explicações:
+1. Entender o que precisamos:
+O método precisa receber um ID na URL.
+
+Esse ID será usado para procurar dentro de uma lista de pessoas.
+
+Se encontrar, devolve a pessoa.
+
+Se não encontrar, devolve erro 404 (não encontrado).
+
+2. Pensando no método:
+Verbo HTTP: GET
+
+Rota: /Pessoa/{id}
+
+Parâmetro: id (inteiro)
+
+3. Como criar o método no Controller:
+Aqui vai um exemplo super didático:
+
+csharp
+Copiar
+Editar
+[HttpGet("{id}")] // <-- Olha aqui: colocamos "{id}" na rota
+public ActionResult<Pessoa> BuscarPessoaPorId(int id)
+{
+    var lista = new List<Pessoa>
+    {
+        new Pessoa {Id = 1, Nome = "Lucas", Idade = 27, Cpf = "44003132053",  Email = "lucas@email.com"},
+        new Pessoa {Id = 2, Nome = "Mariana", Idade = 31, Cpf = "11223344556", Email = "mariana@email.com" }
+    };
+
+    var pessoa = lista.FirstOrDefault(p => p.Id == id);
+
+    if (pessoa == null)
+    {
+        return NotFound(); // Retorna erro 404 se não achou
+    }
+
+    return Ok(pessoa); // Retorna a pessoa se achou
+}
+🧠 Entendendo cada linha:
+
+Linha	Explicação
+[HttpGet("{id}")]	Diz para o sistema que queremos pegar o id da URL.
+public ActionResult<Pessoa> BuscarPessoaPorId(int id)	Um método que recebe um id como entrada e retorna uma Pessoa.
+lista.FirstOrDefault(p => p.Id == id)	Procura na lista a primeira pessoa que tenha o ID igual.
+if (pessoa == null)	Se não encontrou, manda um erro 404.
+return Ok(pessoa);	Se encontrou, devolve a pessoa com sucesso.
+🌐 Agora suas rotas ficam assim:
+
+Método	Rota	O que faz
+GET	/Pessoa	Lista todas as pessoas
+GET	/Pessoa/{id}	Busca uma pessoa específica pelo ID
+🎯 Tarefa pra você agora:
+Cria esse método aí no seu PessoaController e testa no Swagger ou Postman!
+Tenta por exemplo /Pessoa/1 e /Pessoa/2... e depois tenta /Pessoa/99 pra ver o erro 404 funcionando!
