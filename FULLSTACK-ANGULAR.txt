@@ -908,6 +908,7 @@ Se você tirasse "ListarPessoas" do [HttpGet] e deixasse só:
 
 [HttpGet]
 public IEnumerable<Pessoa> ListarPessoas()
+
 Pergunta:
 Qual seria a URL (rota) para acessar esse método agora?
 
