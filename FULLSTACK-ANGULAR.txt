@@ -1025,3 +1025,145 @@ GET	/Pessoa/{id}	Busca uma pessoa específica pelo ID
 🎯 Tarefa pra você agora:
 Cria esse método aí no seu PessoaController e testa no Swagger ou Postman!
 Tenta por exemplo /Pessoa/1 e /Pessoa/2... e depois tenta /Pessoa/99 pra ver o erro 404 funcionando!
+_______________________________________________________________________________________________________________________________________________________________________
+
+🎯 Desafio Bônus: Criar busca de Pessoa pelo CPF
+📋 O que você precisa fazer:
+Criar um novo método GET no PessoaController.
+
+Esse método vai receber o CPF pela URL.
+
+Ele vai procurar a pessoa com aquele CPF na lista.
+
+Se encontrar, retorna a pessoa.
+
+Se não encontrar, retorna erro 404.
+
+🧠 Dicas para pensar antes de codar:
+O CPF é uma string, não número. Então o parâmetro do método será string cpf.
+
+A rota precisa dizer que vai receber um CPF.
+
+A busca será usando .FirstOrDefault(p => p.Cpf == cpf).
+
+📦 Modelo que você deve seguir:
+Te dou só o esqueleto, você preenche:
+
+csharp
+Copiar
+Editar
+[HttpGet("BuscarPorCpf/{cpf}")]
+public ActionResult<Pessoa> BuscarPessoaPorCpf(string cpf)
+{
+    var lista = new List<Pessoa>
+    {
+        new Pessoa {Id = 1, Nome = "Lucas", Idade = 27, Cpf = "44003132053",  Email = "lucas@email.com"},
+        new Pessoa {Id = 2, Nome = "Mariana", Idade = 31, Cpf = "11223344556", Email = "mariana@email.com" }
+    };
+
+    // 🧠 Pense: como procurar uma pessoa pelo CPF?
+    // var pessoa = ???
+
+    // 🧠 Pense: se não encontrar, como devolve erro 404?
+    
+    // 🧠 Pense: se encontrar, como devolve com sucesso?
+}
+📍 Como vai funcionar:
+
+Método	Rota	Exemplo	Resultado
+GET	/Pessoa/BuscarPorCpf/{cpf}	/Pessoa/BuscarPorCpf/44003132053	Retorna o Lucas
+GET	/Pessoa/BuscarPorCpf/{cpf}	/Pessoa/BuscarPorCpf/00000000000	Retorna erro 404
+🔥 Dicas Extras:
+CPF sempre é tratado como texto, nunca como número, para não perder zeros à esquerda.
+
+Presta atenção se o parâmetro da URL está idêntico ao nome do argumento no método ({cpf} na rota e string cpf no método).
+
+Quer que eu também te dê depois um desafio nível 2? (como, por exemplo, cadastrar uma nova pessoa no sistema, com verbo POST? 🚀)
+Só se você quiser! Quer? 🎯
+
+
+
+
+
+
+Você disse:
+este metodo esta certo ?:
+[HttpGet("{Cpf}")]
+public ActionResult<Pessoa>BuscarPessoaPorCpf(string cpf)
+{
+    var lista = new List<Pessoa>
+    {
+        new Pessoa  {Id = 1, Nome = "Lucas", Idade = 27, Cpf = "44003132053", Email = "lucas@email.com"},
+        new Pessoa  {Id = 2, Nome = "Mariana", Idade = 31,  Cpf = "11223344556", Email = "mariana@email.com" }
+    };
+
+    var pessoa = lista.FirstOrDefault(p => p.Cpf == cpf);
+    if (pessoa == null) 
+    { 
+        return NotFound();
+    }
+
+    return Ok(pessoa);
+}
+
+
+O ChatGPT disse:
+👏 Você mandou muito bem!
+O seu método está quase perfeito — falta só um pequeno detalhe técnico para ficar 100%:
+
+🎯 Análise do seu código:
+O que está certo ✅:
+[HttpGet("{Cpf}")] → OK!
+
+ActionResult<Pessoa> → OK!
+
+Criou a lista certinha → OK!
+
+Usou .FirstOrDefault para buscar → OK!
+
+Tratou null com NotFound() → OK!
+
+Retornou Ok(pessoa) → OK!
+
+Seu raciocínio está ótimo! Você entendeu o fluxo do GET com parâmetro. 🚀
+
+👀 Pequeno detalhe:
+Na anotação [HttpGet("{Cpf}")], você escreveu "Cpf" com C maiúsculo, mas o parâmetro do método é string cpf (c minúsculo).
+
+ASP.NET Core liga o nome da URL com o nome do parâmetro do método, e ele é case-insensitive (não diferencia maiúsculo e minúsculo), então neste caso não daria erro, mas o mais bonito e organizado seria deixar tudo com a mesma grafia.
+
+💡 Melhoraríamos para:
+
+
+[HttpGet("{cpf}")]
+public ActionResult<Pessoa> BuscarPessoaPorCpf(string cpf)
+Assim fica tudo padronizado!
+
+🛠 Resumo Final do Método Corrigido:
+
+[HttpGet("{cpf}")]
+public ActionResult<Pessoa> BuscarPessoaPorCpf(string cpf)
+{
+    var lista = new List<Pessoa>
+    {
+        new Pessoa { Id = 1, Nome = "Lucas", Idade = 27, Cpf = "44003132053", Email = "lucas@email.com" },
+        new Pessoa { Id = 2, Nome = "Mariana", Idade = 31, Cpf = "11223344556", Email = "mariana@email.com" }
+    };
+
+    var pessoa = lista.FirstOrDefault(p => p.Cpf == cpf);
+
+    if (pessoa == null)
+    {
+        return NotFound();
+    }
+
+    return Ok(pessoa);
+}
+
+🧠 O que você aprendeu aqui:
+
+Conceito	Explicação
+[HttpGet("{param}")]	Diz que a rota aceita um parâmetro dinâmico.
+ActionResult<T>	Permite retornar sucesso (Ok) ou erro (NotFound).
+FirstOrDefault	Busca o primeiro item que combina ou retorna null.
+Validação de null	Sempre que buscar no banco ou lista, cheque se veio algo!
