@@ -1170,4 +1170,59 @@ FirstOrDefault			Busca o primeiro item que combina ou retorna null.
 Validação de null		Sempre que buscar no banco ou lista, cheque se veio algo!
 _______________________________________________________________________________________________________________________________________________________________________
 
+🎯 Seu desafio: Criar um POST para adicionar uma nova pessoa!
+📜 Estrutura básica:
+csharp
+Copiar
+Editar
+[HttpPost]
+public ActionResult<Pessoa> AdicionarPessoa(Pessoa novaPessoa)
+{
+    // Imagina que aqui no futuro você vai salvar no banco
+    // Por enquanto, vamos apenas devolver a pessoa recebida
+
+    return Ok(novaPessoa);
+}
+🧠 Explicação do que está acontecendo:
+
+Parte	Explicação
+[HttpPost]	Diz que esse método responde a requisições POST.
+AdicionarPessoa(Pessoa novaPessoa)	O body da requisição será deserializado (convertido) em uma instância de Pessoa.
+return Ok(novaPessoa);	Retorna o que foi enviado, simulando que "salvou" com sucesso.
+🛠 Como testar no Swagger:
+Abra o Swagger.
+
+Ache o endpoint POST /Pessoa.
+
+Clique em "Try it out".
+
+Preencha o JSON, exemplo:
+
+json
+Copiar
+Editar
+{
+  "id": 0,
+  "nome": "Ana",
+  "idade": 25,
+  "cpf": "99999999999",
+  "email": "ana@email.com"
+}
+(o ID pode ser 0 porque num sistema real o banco gera o ID automaticamente)
+
+Clique em Execute e veja o retorno.
+
+🧠 Detalhes importantes para o futuro:
+Depois vamos aprender a salvar no banco de dados de verdade (não só devolver o objeto).
+
+Em projetos reais, o ID não vem do frontend, ele é gerado no banco.
+
+A API deve validar se o CPF é único (mas podemos fazer isso mais pra frente).
+
+📌 Resumo do que você vai aprender agora:
+Como receber um objeto do corpo da requisição.
+
+Como criar o verbo POST na Web API.
+
+Como testar usando o Swagger.
 
