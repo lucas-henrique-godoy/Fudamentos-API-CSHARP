@@ -1186,9 +1186,11 @@ public ActionResult<Pessoa> AdicionarPessoa(Pessoa novaPessoa)
 🧠 Explicação do que está acontecendo:
 
 Parte	Explicação
-[HttpPost]	Diz que esse método responde a requisições POST.
+
+[HttpPost]				Diz que esse método responde a requisições POST.
 AdicionarPessoa(Pessoa novaPessoa)	O body da requisição será deserializado (convertido) em uma instância de Pessoa.
-return Ok(novaPessoa);	Retorna o que foi enviado, simulando que "salvou" com sucesso.
+return Ok(novaPessoa);			Retorna o que foi enviado, simulando que "salvou" com sucesso.
+
 🛠 Como testar no Swagger:
 Abra o Swagger.
 
