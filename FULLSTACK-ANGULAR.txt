@@ -1172,9 +1172,7 @@ ________________________________________________________________________________
 
 🎯 Seu desafio: Criar um POST para adicionar uma nova pessoa!
 📜 Estrutura básica:
-csharp
-Copiar
-Editar
+
 [HttpPost]
 public ActionResult<Pessoa> AdicionarPessoa(Pessoa novaPessoa)
 {
