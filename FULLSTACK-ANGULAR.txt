@@ -1162,11 +1162,12 @@ public ActionResult<Pessoa> BuscarPessoaPorCpf(string cpf)
 
 🧠 O que você aprendeu aqui:
 
-Conceito	Explicação
-[HttpGet("{param}")]	Diz que a rota aceita um parâmetro dinâmico.
-ActionResult<T>	Permite retornar sucesso (Ok) ou erro (NotFound).
-FirstOrDefault	Busca o primeiro item que combina ou retorna null.
-Validação de null	Sempre que buscar no banco ou lista, cheque se veio algo!
+Conceito			Explicação
+
+[HttpGet("{param}")]		Diz que a rota aceita um parâmetro dinâmico.
+ActionResult<T>			Permite retornar sucesso (Ok) ou erro (NotFound).
+FirstOrDefault			Busca o primeiro item que combina ou retorna null.
+Validação de null		Sempre que buscar no banco ou lista, cheque se veio algo!
 _______________________________________________________________________________________________________________________________________________________________________
 
 
