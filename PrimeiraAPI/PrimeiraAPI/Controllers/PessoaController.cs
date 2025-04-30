@@ -59,6 +59,7 @@ namespace CadastroAPI.Controllers
         [HttpPost]
         public ActionResult<Pessoa> AdicionarPessoa(Pessoa novaPessoa)
         {
+            
             return Ok(novaPessoa);
         }
 
